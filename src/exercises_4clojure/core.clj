@@ -1,7 +1,11 @@
 (ns exercises-4clojure.core
-  (:gen-class))
+  (:gen-class)
+  (use exercises-4clojure.elementary)
+  )
 
 (defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+  []
+  (p1)
+  (p2)
+  (p3)
+  )
