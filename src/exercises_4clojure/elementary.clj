@@ -47,3 +47,19 @@
   []
   (println (str "problem 3: " (v3 s3)))
   )
+
+
+;; problem 4
+(defn v4
+  [x]
+  (= (apply list x) '(:a :b :c))
+  )
+
+(def s4
+  '(:a :b :c)
+  )
+
+(defn p4
+  []
+  (println (str "problem 4: " (v4 s4)))
+  )
