@@ -63,3 +63,58 @@
   []
   (println (str "problem 4: " (v4 s4)))
   )
+
+
+;; problem 5
+(defn v5
+  [x]
+  (every? identity
+    [
+     (= x (conj '(2 3 4) 1))
+     (= x (conj '(3 4) 2 1))
+     ]
+    )
+  )
+
+(def s5
+  '(1 2 3 4)
+  )
+
+(defn p5
+  []
+  (println (str "problem 5: " (v5 s5))))
+
+
+;; problem 6
+(defn v6
+  [x]
+  (= x (list :a :b :c) (vec '(:a :b :c)) (vector :a :b :c))
+  )
+
+(def s6
+  [:a :b :c]
+  )
+
+(defn p6
+  []
+  (println (str "problem 6: " (v6 s6))))
+
+
+;; problem 7
+(defn v7
+  [x]
+  (every? identity 
+    [
+     (= x (conj [1 2] 3 4))
+     (= x (conj [1 2 3] 4))
+     ]
+    )
+  )
+
+(def s7
+  [1 2 3 4]
+  )
+
+(defn p7
+  []
+  (println (str "problem 7: " (v7 s7))))
