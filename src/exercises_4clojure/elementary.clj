@@ -118,3 +118,59 @@
 (defn p7
   []
   (println (str "problem 7: " (v7 s7))))
+
+
+;; problem 8
+(defn v8
+  [x]
+  (every? identity 
+    [
+     (= x (set '(:a :a :b :c :c :c :c :d :d)))
+     ;; Below causes error: clojure.set not found. Probably have to import lib.
+     ;(= x (clojure.set/union #{:a :b :c} #{:b :c :d}))
+     ]
+    )
+  )
+
+(def s8
+  #{:a :b :c :d}
+  )
+
+(defn p8
+  []
+  (println (str "problem 8: " (v8 s8))))
+
+
+;; problem 9
+(defn v9
+  [x]
+  (= #{1 2 3 4} (conj #{1 4 3} x))
+  )
+
+(def s9
+  2
+  )
+
+(defn p9
+  []
+  (println (str "problem 9: " (v9 s9))))
+
+
+;; problem 10
+(defn v10
+  [x]
+  (every? identity 
+    [
+     (= x ((hash-map :a 10, :b 20, :c 30) :b))
+     (= x (:b {:a 10, :b 20, :c 30}))
+     ]
+    )
+  )
+
+(def s10
+  20
+  )
+
+(defn p10
+  []
+  (println (str "problem 10: " (v10 s10))))
