@@ -7,9 +7,7 @@
   (= x true)
   )
 
-(def s1
-  true
-  )
+(def s1 true)
 
 (defn p1
   []
@@ -23,13 +21,11 @@
   (= (- 10 (* 2 3)) x)
   )
 
-(def s2
-  4
-  )
+(def s2 4)
 
 (defn p2
   []
-  (println (str "problem 2: " (v2 s2)))
+  (println (str "problem 12: " (v2 s2)))
   )
 
 
@@ -39,9 +35,7 @@
   (=  x (.toUpperCase "hello world"))
   )
 
-(def s3
-  "HELLO WORLD"
-  )
+(def s3 "HELLO WORLD")
 
 (defn p3
   []
@@ -55,9 +49,7 @@
   (= (apply list x) '(:a :b :c))
   )
 
-(def s4
-  '(:a :b :c)
-  )
+(def s4 '(:a :b :c))
 
 (defn p4
   []
@@ -72,17 +64,14 @@
     [
      (= x (conj '(2 3 4) 1))
      (= x (conj '(3 4) 2 1))
-     ]
-    )
-  )
+     ]))
 
-(def s5
-  '(1 2 3 4)
-  )
+(def s5 '(1 2 3 4))
 
 (defn p5
   []
-  (println (str "problem 5: " (v5 s5))))
+  (println (str "problem 5: " (v5 s5)))
+  )
 
 
 ;; problem 6
@@ -91,13 +80,12 @@
   (= x (list :a :b :c) (vec '(:a :b :c)) (vector :a :b :c))
   )
 
-(def s6
-  [:a :b :c]
-  )
+(def s6 [:a :b :c])
 
 (defn p6
   []
-  (println (str "problem 6: " (v6 s6))))
+  (println (str "problem 6: " (v6 s6)))
+  )
 
 
 ;; problem 7
@@ -107,17 +95,14 @@
     [
      (= x (conj [1 2] 3 4))
      (= x (conj [1 2 3] 4))
-     ]
-    )
-  )
+     ]))
 
-(def s7
-  [1 2 3 4]
-  )
+(def s7 [1 2 3 4])
 
 (defn p7
   []
-  (println (str "problem 7: " (v7 s7))))
+  (println (str "problem 7: " (v7 s7)))
+  )
 
 
 ;; problem 8
@@ -128,17 +113,14 @@
      (= x (set '(:a :a :b :c :c :c :c :d :d)))
      ;; Below causes error: clojure.set not found. Probably have to import lib.
      ;(= x (clojure.set/union #{:a :b :c} #{:b :c :d}))
-     ]
-    )
-  )
+     ]))
 
-(def s8
-  #{:a :b :c :d}
-  )
+(def s8 #{:a :b :c :d})
 
 (defn p8
   []
-  (println (str "problem 8: " (v8 s8))))
+  (println (str "problem 8: " (v8 s8)))
+  )
 
 
 ;; problem 9
@@ -147,13 +129,12 @@
   (= #{1 2 3 4} (conj #{1 4 3} x))
   )
 
-(def s9
-  2
-  )
+(def s9 2)
 
 (defn p9
   []
-  (println (str "problem 9: " (v9 s9))))
+  (println (str "problem 9: " (v9 s9)))
+  )
 
 
 ;; problem 10
@@ -163,14 +144,114 @@
     [
      (= x ((hash-map :a 10, :b 20, :c 30) :b))
      (= x (:b {:a 10, :b 20, :c 30}))
-     ]
-    )
-  )
+     ]))
 
-(def s10
-  20
-  )
+(def s10 20)
 
 (defn p10
   []
-  (println (str "problem 10: " (v10 s10))))
+  (println (str "problem 10: " (v10 s10)))
+  )
+
+
+;; problem 11
+(defn v11
+  [x]
+  (= {:a 1 :b 2 :c 3}
+     (conj {:a 1} x [:c 3])
+     ))
+
+(def s11 {:b 2})
+
+(defn p11
+  []
+  (println (str "problem 11: " (v11 s11)))
+  )
+
+
+;; problem 12
+(defn v12
+  [x]
+  (every? identity
+    [
+     (= x (first '(3 2 1)))
+     (= x (second [2 3 4]))
+     (= x (last (list 1 2 3)))
+     ]))
+
+(def s12 3)
+
+(defn p12
+  []
+  (println (str "problem 12: " (v12 s12)))
+  )
+
+
+;; problem 13
+(defn v13
+  [x]
+  (= x (rest [10 20 30 40]))
+  )
+
+(def s13 [20 30 40])
+
+(defn p13
+  []
+  (println (str "problem 13: " (v13 s13)))
+  )
+
+
+;; problem 14
+(defn v14
+  [x]
+  (every? identity
+    [
+     (= x ((fn add-five [x] (+ x 5)) 3))
+     (= x ((fn [x] (+ x 5)) 3))
+     (= x (#(+ % 5) 3))
+     (= x ((partial + 5) 3))
+     ]))
+
+(def s14 8)
+
+(defn p14
+  []
+  (println (str "problem 14: " (v14 s14)))
+  )
+
+
+;; problem 15
+(defn v15
+  [x]
+  (every? identity
+    [
+     (= (x 2) 4)
+     (= (x 3) 6)
+     (= (x 11) 22)
+     (= (x 7) 14)
+     ]))
+
+(def s15 #(* % 2))
+
+(defn p15
+  []
+  (println (str "problem 15: " (v15 s15)))
+  )
+
+
+;; problem 16
+(defn v16
+  [x]
+  (every? identity
+    [
+     (= (x "Dave") "Hello, Dave!")
+     (= (x "Jenn") "Hello, Jenn!")
+     (= (x "Rhea") "Hello, Rhea!")
+     ]))
+
+(def s16 #(str "Hello, " % "!"))
+
+(defn p16
+  []
+  (println (str "problem 16: " (v16 s16)))
+  )
