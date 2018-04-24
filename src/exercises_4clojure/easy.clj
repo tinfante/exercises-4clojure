@@ -157,3 +157,51 @@
   []
   (println (str "problem 25: " (v25 s25)))
   )
+
+
+;; problem 26
+(defn v26
+  [x]
+  (every? identity
+    [
+     (= (x 3) '(1 1 2))
+     (= (x 6) '(1 1 2 3 5 8))
+     (= (x 8) '(1 1 2 3 5 8 13 21))
+     ]))
+
+(def s26
+  (fn [x]
+    (loop [c 0 l [0 1]]
+      (if (< c (- x 1))
+        (recur (inc c) (conj l (apply + (take-last 2 l))) )
+        (rest l)
+        ))))
+
+(defn p26
+  []
+  (println (str "problem 26: " (v26 s26)))
+  )
+
+
+;; problem 27
+(defn v27
+  [x]
+  (every? identity
+    [
+     (false? (x '(1 2 3 4 5)))
+     (true? (x "racecar"))
+     (true? (x [:foo :bar :foo]))
+     (true? (x '(1 1 3 3 1 1)))
+     (false? (x '(:a :b :c)))
+     ]))
+
+(def s27
+  (fn is-palindrome [x]
+    (let [l (int (Math/floor (/ (count x) 2)))]
+      (= (take l x) (reverse (take-last l x)))
+      )))
+
+(defn p27
+  []
+  (println (str "problem 27: " (v27 s27)))
+  )
