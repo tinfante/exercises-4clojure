@@ -255,3 +255,31 @@
   []
   (println (str "problem 16: " (v16 s16)))
   )
+
+
+;; problem 17
+(defn v17
+  [x]
+  (= x (map #(+ % 5) '(1 2 3)))
+  )
+
+(def s17 '(6 7 8))
+
+(defn p17
+  []
+  (println (str "problem 17: " (v17 s17)))
+  )
+
+
+;; problem 18
+(defn v18
+  [x]
+  (= x (filter #(> % 5) '(3 4 5 6 7)))
+  )
+
+(def s18 '(6 7))
+
+(defn p18
+  []
+  (println (str "problem 18: " (v18 s18)))
+  )
