@@ -1,10 +1,13 @@
 (ns exercises-4clojure.core
   (:gen-class)
   (use exercises-4clojure.elementary)
+  (use exercises-4clojure.easy)
   )
 
 (defn -main
   []
+  
+  ;; elementary
   (p1)
   (p2)
   (p3)
@@ -23,6 +26,13 @@
   (p16)
   (p17)
   (p18)
+
+  ;; easy
   (p19)
   (p20)
+  (p21)
+  (p22)
+  (p23)
+  (p24)
+  (p25)
   )
