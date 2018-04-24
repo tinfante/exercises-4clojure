@@ -283,3 +283,71 @@
   []
   (println (str "problem 18: " (v18 s18)))
   )
+
+
+;; problem 19
+(defn v19
+  [x]
+  (every? identity
+    [
+     (= (x [1 2 3 4 5]) 5)
+     (= (x '(5 4 3)) 3)
+     (= (x ["b" "c" "d"]) "d")
+     ]))
+
+(def s19
+  (fn [[f & r]]
+    (if r
+      (recur r)
+      f)
+    ))
+
+(defn p19
+  []
+  (println (str "problem 19: " (v19 s19)))
+  )
+
+
+;; problem 20
+(defn v20
+  [x]
+  (every? identity
+    [
+     (= (x (list 1 2 3 4 5)) 4)
+     (= (x ["a" "b" "c"]) "b")
+     (= (x [[1 2] [3 4]]) [1 2])
+     ]))
+
+(def s20
+  (fn [x] (nth x (- (count x) 2)))
+  )
+
+(defn p20
+  []
+  (println (str "problem 20: " (v20 s20)))
+  )
+
+
+;; problem 21
+(defn v21
+  [x]
+  (every? identity
+    [
+     (= (x '(4 5 6 7) 2) 6)
+     (= (x [:a :b :c] 0) :a)
+     (= (x [1 2 3 4] 1) 2)
+     (= (x '([1 2] [3 4] [5 6]) 2) [5 6])
+     ]))
+
+(def s21
+  (fn [s i]
+    (loop [c i t s]
+      (if (zero? c)
+        (first t)
+        (recur (dec c) (rest t))
+        ))))
+
+(defn p21
+  []
+  (println (str "problem 21: " (v21 s21)))
+  )
