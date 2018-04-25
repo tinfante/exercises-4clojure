@@ -262,3 +262,32 @@
   []
   (println (str "problem 29: " (v29 s29)))
   )
+
+
+;; problem 30
+(defn v30
+  [x]
+  (every? identity
+    [
+     (= (apply str (x "Leeeeeerrroyyy")) "Leroy")
+     (= (x [1 1 2 3 3 2 2 3]) '(1 2 3 2 3))
+     (= (x [[1 2] [1 2] [3 4] [1 2]]) '([1 2] [3 4] [1 2]))
+     ]))
+
+(def s30
+  (fn compress
+    ([x]
+     (compress (rest x) (first x) (conj '() (first x)))
+     )
+    ([x last-item compressed]
+     (if (empty? x)
+       compressed
+       (if (= (first x) last-item)
+         (compress (rest x) last-item compressed)
+         (compress (rest x) (first x) (conj (vec compressed) (first x)))
+         )))))
+
+(defn p30
+  []
+  (println (str "problem 30: " (v30 s30)))
+  )
