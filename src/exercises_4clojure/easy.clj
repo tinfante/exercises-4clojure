@@ -238,3 +238,27 @@
   []
   (println (str "problem 28: " (v28 s28)))
   )
+
+
+;; problem 29
+(defn v29
+  [x]
+  (every? identity
+    [
+     (= (x "HeLlO, WoRlD!") "HLOWRD")
+     (empty? (x "nothing"))
+     (= (x "$#A(*&987Zf") "AZ")
+     ]))
+
+(import 'java.lang.Character)
+(require 'clojure.string)
+(def s29
+  (fn
+    [x]
+    (clojure.string/join "" (filter #(Character/isUpperCase %) x))
+  ))
+
+(defn p29
+  []
+  (println (str "problem 29: " (v29 s29)))
+  )
