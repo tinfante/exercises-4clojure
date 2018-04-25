@@ -205,3 +205,36 @@
   []
   (println (str "problem 27: " (v27 s27)))
   )
+
+
+;; problem 28
+(defn v28
+  [x]
+  (every? identity
+    [
+     (= (x '((1 2) 3 [4 [5 6]])) '(1 2 3 4 5 6))
+     (= (x ["a" ["b"] "c"]) '("a" "b" "c"))
+     (= (x '((((:a))))) '(:a))
+     ]))
+
+(def s28
+  (fn recur-flatten [z]
+    (if (some sequential? z)
+      (recur-flatten ((fn simple-flatten
+                        [x]
+                        (loop [y x f []]
+                          (if (empty? y)
+                            (apply list f)
+                            (recur
+                              (rest y)
+                              (if (sequential? (first y))
+                                (concat f (first y))
+                                (conj (vec f) (first y))
+                                )))))
+                      z))
+      z)))
+
+(defn p28
+  []
+  (println (str "problem 28: " (v28 s28)))
+  )
