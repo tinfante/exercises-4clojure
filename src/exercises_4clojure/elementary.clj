@@ -91,7 +91,7 @@
 ;; problem 7
 (defn v7
   [x]
-  (every? identity 
+  (every? identity
     [
      (= x (conj [1 2] 3 4))
      (= x (conj [1 2 3] 4))
@@ -108,7 +108,7 @@
 ;; problem 8
 (defn v8
   [x]
-  (every? identity 
+  (every? identity
     [
      (= x (set '(:a :a :b :c :c :c :c :d :d)))
      ;; Below causes error: clojure.set not found. Probably have to import lib.
@@ -140,7 +140,7 @@
 ;; problem 10
 (defn v10
   [x]
-  (every? identity 
+  (every? identity
     [
      (= x ((hash-map :a 10, :b 20, :c 30) :b))
      (= x (:b {:a 10, :b 20, :c 30}))
@@ -282,4 +282,52 @@
 (defn p18
   []
   (println (str "problem 18: " (v18 s18)))
+  )
+
+
+;; problem 35
+(defn v35
+  [x]
+  (every? identity
+    [
+     (= x (let [x 5] (+ 2 x)))
+     (= x (let [x 3, y 10] (- y x)))
+     (= x (let [x 21] (let [y 3] (/ x y))))
+     ]))
+
+(def s35 7)
+
+(defn p35
+  []
+  (println (str "problem 35: " (v35 s35)))
+  )
+
+
+;; problem 36
+(defn v36
+  []
+  (every? identity
+    [
+     (= 10 (let [z 1 y 3 x 7] (+ x y)))
+     (= 4 (let [z 1 y 3 x 7] (+ y z)))
+     (= 1 (let [z 1 y 3 x 7] z))
+     ]))
+
+(defn p36
+  []
+  (println (str "problem 36: " (v36)))
+  )
+
+
+;; problem 37
+(defn v37
+  [x]
+  (= x (apply str (re-seq #"[A-Z]+" "bA1B3Ce ")))
+  )
+
+(def s37 "ABC")
+
+(defn p37
+  []
+  (println (str "problem 37: " (v37 s37)))
   )

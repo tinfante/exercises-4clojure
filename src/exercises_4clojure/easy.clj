@@ -291,3 +291,44 @@
   []
   (println (str "problem 30: " (v30 s30)))
   )
+
+
+
+
+;; problem 38
+(defn v38
+  [x]
+  (every? identity
+    [
+     (= (x 1 8 3 4) 8)
+     (= (x 30 20) 30)    
+     (= (x 45 67 11) 67)
+     ]))
+
+(def s38-a
+  (fn [& x]
+    ((fn my-max [s m]
+       (if (empty? s)
+         m
+         (if (> (first s) m)
+           (my-max (rest s) (first s))
+           (my-max (rest s) m)
+           )))
+     (rest x)
+     (first x)
+     )))
+
+; feels like cheating
+(def s38-b
+  (fn [& x] (last (sort x)))
+  )
+
+; with reduce
+(def s38-c
+  (fn [& x] (reduce (fn [a b] (if (> a b) a b)) 0 x))
+  )
+
+(defn p38
+  []
+  (println (str "problem 38: " (v38 s38-c)))
+  )
