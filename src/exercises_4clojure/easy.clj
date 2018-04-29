@@ -293,6 +293,82 @@
   )
 
 
+;; problem 31
+(defn v31
+  [x]
+  (every? identity
+    [
+     (= (x [1 1 2 1 1 1 3 3]) '((1 1) (2) (1 1 1) (3 3)))
+     (= (x [:a :a :b :b :c]) '((:a :a) (:b :b) (:c)))
+     (= (x [[1 2] [1 2] [3 4]]) '(([1 2] [1 2]) ([3 4])))
+     ]))
+
+(def s31
+  (fn pack
+    ([x]
+     (pack (rest x) (first x) [(list (first x))])
+     )
+    ([x last-item packed]
+     (if (empty? x)
+       packed
+       (if (= (first x) last-item)
+         (pack (rest x)
+               last-item
+               (update-in packed [(dec (count packed))] conj last-item)
+               )
+         (pack (rest x) (first x) (conj packed (list (first x))))
+         )))))
+
+(defn p31
+  []
+  (println (str "problem 31: " (v31 s31)))
+  )
+
+
+;; problem 32
+(defn v32
+  [x]
+  (every? identity
+    [
+     (= (x [1 2 3]) '(1 1 2 2 3 3))
+     (= (x [:a :a :b :b]) '(:a :a :a :a :b :b :b :b))
+     (= (x [[1 2] [3 4]]) '([1 2] [1 2] [3 4] [3 4]))
+     (= (x [[1 2] [3 4]]) '([1 2] [1 2] [3 4] [3 4]))
+     ]))
+
+(def s32
+  (fn [x] (apply list (reduce #(conj %1 %2 %2) [] x)))
+  )
+
+(defn p32
+  []
+  (println (str "problem 32: " (v32 s32)))
+  )
+
+
+;; problem 33
+(defn v33
+  [x]
+  (every? identity
+    [
+     (= (x [1 2 3] 2) '(1 1 2 2 3 3))
+     (= (x [:a :b] 4) '(:a :a :a :a :b :b :b :b))
+     (= (x [4 5 6] 1) '(4 5 6))
+     (= (x [[1 2] [3 4]] 2) '([1 2] [1 2] [3 4] [3 4]))
+     (= (x [44 33] 2) [44 44 33 33])
+     ]))
+
+(def s33
+  (fn [x y]
+    (apply list (reduce (fn [a b] (apply conj a (take y (repeat b)))) [] x)))
+  )
+
+(defn p33
+  []
+  (println (str "problem 33: " (v32 s32)))
+  )
+
+
 
 
 ;; problem 38
