@@ -463,3 +463,79 @@
   []
   (println (str "problem 39: " (v39 s39)))
   )
+
+
+;; problem 40
+(defn v40
+  [x]
+  (every? identity
+    [
+     (= (x 0 [1 2 3]) [1 0 2 0 3])
+     (= (apply str (x ", " ["one" "two" "three"])) "one, two, three")
+     (= (x :z [:a :b :c :d]) [:a :z :b :z :c :z :d])
+     ]))
+
+(def s40
+  (fn [x y] (vec (butlast (reduce (fn [a b] (conj a b x)) [] y))))
+  )
+
+(defn p40
+  []
+  (println (str "problem 40: " (v40 s40)))
+  )
+
+
+;; problem 41
+(defn v41
+  [x]
+  (every? identity
+    [
+     (= (x [1 2 3 4 5 6 7 8] 3) [1 2 4 5 7 8])  
+     (= (x [:a :b :c :d :e :f] 2) [:a :c :e])
+     (= (x [1 2 3 4 5 6] 4) [1 2 3 5 6])
+     ]))
+
+(def s41
+  (fn drop-nth
+    ([x n]
+     (drop-nth x n 1 [])
+     )
+    ([x n i z]
+     (if (empty? x)
+       z
+       (if (= 0 (mod i n))
+         (drop-nth (rest x) n (inc i) z)
+         (drop-nth (rest x) n (inc i) (conj z (first x)))
+         ))))
+  )
+
+(defn p41
+  []
+  (println (str "problem 41: " (v41 s41)))
+  )
+
+
+;; problem 42
+(defn v42
+  [x]
+  (every? identity
+    [
+     (= (x 1) 1)    
+     (= (x 3) 6)
+     (= (x 5) 120)
+     (= (x 8) 40320)
+     ]))
+
+(def s42
+ (fn [n]
+   (loop [i 0 f 1]
+     (if (< i n)
+       (recur (inc i) (* f (inc i)))
+       f
+       )))
+  )
+
+(defn p42
+  []
+  (println (str "problem 42: " (v42 s42)))
+  )
