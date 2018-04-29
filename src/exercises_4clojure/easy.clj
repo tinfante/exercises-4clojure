@@ -585,7 +585,7 @@
   (fn [y x]
     (apply list
            (apply conj
-                  (vec (take-last (- (count x) (mod y (count x))) x))
+                  (vec (drop (mod y (count x)) x))
                   (take (mod y (count x)) x)
                   )))
   )
