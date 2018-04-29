@@ -567,3 +567,30 @@
   []
   (println (str "problem 43: " (v43 s43)))
   )
+
+
+;; problem 44
+(defn v44
+  [x]
+  (every? identity
+    [
+     (= (x 2 [1 2 3 4 5]) '(3 4 5 1 2))
+     (= (x -2 [1 2 3 4 5]) '(4 5 1 2 3))
+     (= (x 6 [1 2 3 4 5]) '(2 3 4 5 1))
+     (= (x 1 '(:a :b :c)) '(:b :c :a))
+     (= (x -4 '(:a :b :c)) '(:c :a :b))
+     ]))
+
+(def s44
+  (fn [y x]
+    (apply list
+           (apply conj
+                  (vec (take-last (- (count x) (mod y (count x))) x))
+                  (take (mod y (count x)) x)
+                  )))
+  )
+
+(defn p44
+  []
+  (println (str "problem 44: " (v44 s44)))
+  )
