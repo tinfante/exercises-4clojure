@@ -539,3 +539,31 @@
   []
   (println (str "problem 42: " (v42 s42)))
   )
+
+
+;; problem 43
+(defn v43
+  [x]
+  (every? identity
+    [
+     (= (x [1 2 3 4 5 6] 2) '((1 3 5) (2 4 6)))
+     (= (x (range 9) 3) '((0 3 6) (1 4 7) (2 5 8)))
+     (= (x (range 10) 5) '((0 5) (1 6) (2 7) (3 8) (4 9)))
+     ]))
+
+(def s43
+  (fn reverse-interleave
+    ([sqnc num-bins]
+     (reverse-interleave sqnc num-bins 0 (map (fn [_] []) (range num-bins)))
+     )
+    ([sqnc num-bins index result]
+     (if (empty? sqnc)
+       (map #(apply list %) result)
+       (reverse-interleave (rest sqnc) num-bins (inc index) (update-in (vec result) [(mod index num-bins)] conj (first sqnc)))
+       )))
+  )
+
+(defn p43
+  []
+  (println (str "problem 43: " (v43 s43)))
+  )
