@@ -365,10 +365,39 @@
 
 (defn p33
   []
-  (println (str "problem 33: " (v32 s32)))
+  (println (str "problem 33: " (v33 s33)))
   )
 
 
+;; problem 34
+(defn v34
+  [x]
+  (every? identity
+    [
+     (= (x 1 4) '(1 2 3))    
+     (= (x -2 2) '(-2 -1 0 1))
+     (= (x 5 8) '(5 6 7))
+     ]))
+
+(def s34-a
+  (fn [x y]
+    (if (> x y)
+      nil
+      (loop [i x r []]
+        (if (= i y)
+          r
+          (recur (inc i) (conj r i))
+          ))))
+  )
+
+(def s34-b
+  (fn [x y] (take (- y x) (iterate inc x)))
+  )
+
+(defn p34
+  []
+  (println (str "problem 34: " (v34 s34-b)))
+  )
 
 
 ;; problem 38
@@ -407,4 +436,30 @@
 (defn p38
   []
   (println (str "problem 38: " (v38 s38-c)))
+  )
+
+
+;; problem 39
+(defn v39
+  [x]
+  (every? identity
+    [
+     (= (x [1 2 3] [:a :b :c]) '(1 :a 2 :b 3 :c))
+     (= (x [1 2] [3 4 5 6]) '(1 3 2 4))
+     (= (x [1 2 3 4] [5]) [1 5])
+     (= (x [30 20] [25 15]) [30 25 20 15])
+     ]))
+
+(def s39
+  (fn [x y]
+    (loop [f x s y i []]
+      (if (or (empty? f) (empty? s))
+        (apply list i)
+        (recur (rest f) (rest s) (conj i (first f) (first s)))
+        )))
+  )
+
+(defn p39
+  []
+  (println (str "problem 39: " (v39 s39)))
   )
