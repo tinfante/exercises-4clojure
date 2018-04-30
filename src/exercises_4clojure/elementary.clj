@@ -331,3 +331,15 @@
   []
   (println (str "problem 37: " (v37 s37)))
   )
+
+
+;; problem 52
+(defn v52
+  []
+  (= [2 4] (let [[a b c d e] [0 1 2 3 4]] [c e]))
+  )
+
+(defn p52
+  []
+  (println (str "problem 52: " (v52)))
+  )

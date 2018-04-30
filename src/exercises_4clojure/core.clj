@@ -2,6 +2,7 @@
   (:gen-class)
   (use exercises-4clojure.elementary)
   (use exercises-4clojure.easy)
+  (use exercises-4clojure.medium)
   )
 
 (defn -main
@@ -29,6 +30,7 @@
   (p35)
   (p36)
   (p37)
+  (p52)
 
   ;; easy
   (p19)
@@ -54,4 +56,13 @@
   (p42)
   (p43)
   (p44)
+  (p45)
+  (p46)
+  (p47)
+  (p48)
+  (p49)
+  (p51)
+
+  ;; medium
+  (p50)
   )

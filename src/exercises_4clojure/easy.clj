@@ -374,7 +374,7 @@
   [x]
   (every? identity
     [
-     (= (x 1 4) '(1 2 3))    
+     (= (x 1 4) '(1 2 3))
      (= (x -2 2) '(-2 -1 0 1))
      (= (x 5 8) '(5 6 7))
      ]))
@@ -406,7 +406,7 @@
   (every? identity
     [
      (= (x 1 8 3 4) 8)
-     (= (x 30 20) 30)    
+     (= (x 30 20) 30)
      (= (x 45 67 11) 67)
      ]))
 
@@ -490,7 +490,7 @@
   [x]
   (every? identity
     [
-     (= (x [1 2 3 4 5 6 7 8] 3) [1 2 4 5 7 8])  
+     (= (x [1 2 3 4 5 6 7 8] 3) [1 2 4 5 7 8])
      (= (x [:a :b :c :d :e :f] 2) [:a :c :e])
      (= (x [1 2 3 4 5 6] 4) [1 2 3 5 6])
      ]))
@@ -520,7 +520,7 @@
   [x]
   (every? identity
     [
-     (= (x 1) 1)    
+     (= (x 1) 1)
      (= (x 3) 6)
      (= (x 5) 120)
      (= (x 8) 40320)
@@ -593,4 +593,118 @@
 (defn p44
   []
   (println (str "problem 44: " (v44 s44)))
+  )
+
+
+;; problem 45
+(defn v45
+  [x]
+  (= x (take 5 (iterate #(+ 3 %) 1)))
+  )
+
+(def s45
+  '(1 4 7 10 13)
+  )
+
+(defn p45
+  []
+  (println (str "problem 45: " (v45 s45)))
+  )
+
+
+;; problem 46
+(defn v46
+  [x]
+  (every? identity
+    [
+     (= 3 ((x nth) 2 [1 2 3 4 5]))
+     (= true ((x >) 7 8))
+     (= 4 ((x quot) 2 8))
+     (= [1 2 3] ((x take) [1 2 3 4 5] 3))
+
+     ]))
+
+(def s46
+  (fn [f] (fn [x y] (f y x)))
+  )
+
+(defn p46
+  []
+  (println (str "problem 46: " (v46 s46)))
+  )
+
+
+;; problem 47
+(defn v47
+  [x]
+  (every? identity
+    [
+     (contains? #{4 5 6} x)   
+     (contains? [1 1 1 1 1] x)
+     (contains? {4 :a 2 :b} x)
+     (not (contains? [1 2 4] x))
+     ]))
+
+(def s47
+  4
+  )
+
+(defn p47
+  []
+  (println (str "problem 47: " (v47 s47)))
+  )
+
+
+;; problem 48
+(defn v48
+  [x]
+  (every? identity
+    [
+     (= x (some #{2 7 6} [5 6 7 8]))
+     (= x (some #(when (even? %) %) [5 6 7 8]))
+     ]))
+
+(def s48
+  6
+  )
+
+(defn p48
+  []
+  (println (str "problem 48: " (v48 s48)))
+  )
+
+
+;; problem 49
+(defn v49
+  [x]
+  (every? identity
+    [
+     (= (x 3 [1 2 3 4 5 6]) [[1 2 3] [4 5 6]])
+     (= (x 1 [:a :b :c :d]) [[:a] [:b :c :d]])
+     (= (x 2 [[1 2] [3 4] [5 6]]) [[[1 2] [3 4]] [[5 6]]])
+     ]))
+
+(def s49
+  (fn [n s] [(take n s) (drop n s)]) 
+  )
+
+(defn p49
+  []
+  (println (str "problem 49: " (v49 s49)))
+  )
+
+
+;; problem 51
+(defn v51
+  [x]
+  (= [1 2 [3 4 5] [1 2 3 4 5]] (let [[a b & c :as d] x] [a b c d])) 
+  )
+
+(def s51
+  [1 2 3 4 5]
+  )
+
+(defn p51
+  []
+  (println (str "problem 51: " (v51 s51)))
   )
