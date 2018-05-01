@@ -3,6 +3,7 @@
   (use exercises-4clojure.elementary)
   (use exercises-4clojure.easy)
   (use exercises-4clojure.medium)
+  (use exercises-4clojure.hard)
   )
 
 (defn -main
@@ -65,4 +66,7 @@
 
   ;; medium
   (p50)
+
+  ;; hard
+  (p53)
   )
