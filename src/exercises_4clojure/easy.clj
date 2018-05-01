@@ -526,7 +526,7 @@
      (= (x 8) 40320)
      ]))
 
-(def s42
+(def s42-a
  (fn [n]
    (loop [i 0 f 1]
      (if (< i n)
@@ -535,9 +535,17 @@
        )))
   )
 
+(def s42-b
+  (fn [n]
+    (if (= n 1)
+      1
+      (* n (s42-b (dec n)))
+      ))
+  )
+
 (defn p42
   []
-  (println (str "problem 42: " (v42 s42)))
+  (println (str "problem 42: " (v42 s42-b)))
   )
 
 
