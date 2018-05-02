@@ -343,3 +343,19 @@
   []
   (println (str "problem 52: " (v52)))
   )
+
+
+;; problem 57
+(defn v57
+  [x]
+  (= x ((fn foo [x] (when (> x 0) (conj (foo (dec x)) x))) 5))
+  )
+
+(def s57
+  '(5 4 3 2 1)
+  )
+
+(defn p57
+  []
+  (println (str "problem 57: " (v57 s57)))
+  )
