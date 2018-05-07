@@ -215,3 +215,32 @@
   []
   (println (str "problem 60: " (v60 s60)))
   )
+
+
+;; problem 65
+(defn v65
+  [x]
+  (every? identity
+    [
+     (= :map (x {:a 1, :b 2}))
+     (= :list (x (range (rand-int 20))))
+     (= :vector (x [1 2 3 4 5 6]))
+     (= :set (x #{10 (rand-int 5)}))
+     (= [:map :set :vector :list] (map x [{} #{} [] ()]))
+     ]))
+
+(def s65
+  (fn [x]
+    (let [e (empty x)]
+      (cond
+        (= e {}) :map
+        (= e #{}) :set
+        (reversible? e) :vector
+        :else :list
+        )))
+  )
+
+(defn p65
+  []
+  (println (str "problem 65: " (v65 s65)))
+  )
