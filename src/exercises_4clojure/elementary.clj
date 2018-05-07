@@ -359,3 +359,24 @@
   []
   (println (str "problem 57: " (v57 s57)))
   )
+
+
+;; problem 64
+(defn v64
+  [x]
+  (every? identity
+    [
+     (= 15 (reduce x [1 2 3 4 5]))
+     (=  0 (reduce x []))
+     (=  6 (reduce x 1 [2 3]))
+     ]))
+
+(def s64
+  +
+  )
+
+(defn p64
+  []
+  (println (str "problem 64: " (v64 s64)))
+  )
+

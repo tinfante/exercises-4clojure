@@ -647,7 +647,7 @@
   [x]
   (every? identity
     [
-     (contains? #{4 5 6} x)   
+     (contains? #{4 5 6} x)
      (contains? [1 1 1 1 1] x)
      (contains? {4 :a 2 :b} x)
      (not (contains? [1 2 4] x))
@@ -693,7 +693,7 @@
      ]))
 
 (def s49
-  (fn [n s] [(take n s) (drop n s)]) 
+  (fn [n s] [(take n s) (drop n s)])
   )
 
 (defn p49
@@ -705,7 +705,7 @@
 ;; problem 51
 (defn v51
   [x]
-  (= [1 2 [3 4 5] [1 2 3 4 5]] (let [[a b & c :as d] x] [a b c d])) 
+  (= [1 2 [3 4 5] [1 2 3 4 5]] (let [[a b & c :as d] x] [a b c d]))
   )
 
 (def s51
@@ -715,4 +715,84 @@
 (defn p51
   []
   (println (str "problem 51: " (v51 s51)))
+  )
+
+
+;; problem 61
+(defn v61
+  [x]
+  (every? identity
+    [
+     (= (x [:a :b :c] [1 2 3]) {:a 1, :b 2, :c 3})
+     (= (x [1 2 3 4] ["one" "two" "three"]) {1 "one", 2 "two", 3 "three"})
+     (= (x [:foo :bar] ["foo" "bar" "baz"]) {:foo "foo", :bar "bar"})
+     ]))
+
+(def s61
+  (fn my-zipmap
+    ([x y] (my-zipmap x y {}))
+    ([x y m]
+     (if (or (empty? x) (empty? y))
+       m
+       (my-zipmap (rest x) (rest y) (assoc m (first x) (first y)))
+       )))
+  )
+
+(defn p61
+  []
+  (println (str "problem 61: " (v61 s61)))
+  )
+
+
+;; problem 62
+(defn v62
+  [x]
+  (every? identity
+    [
+     (= (take 5 (x #(* 2 %) 1)) [1 2 4 8 16])
+     (= (take 100 (x inc 0)) (take 100 (range)))
+     (= (take 9 (x #(inc (mod % 3)) 1)) (take 9 (cycle [1 2 3])))
+     ]))
+
+(def s62
+  (fn my-iterate
+    [f x]
+    (lazy-seq (cons x (my-iterate f (f x))))
+    )
+  )
+
+(defn p62
+  []
+  (println (str "problem 62: " (v62 s62)))
+  )
+
+
+;; problem 63
+(defn v63
+  [x]
+  (every? identity
+    [
+     (= (x #(> % 5) [1 3 6 8]) {false [1 3], true [6 8]})
+     (= (x #(apply / %) [[1 2] [2 4] [4 6] [3 6]])
+        {1/2 [[1 2] [2 4] [3 6]], 2/3 [[4 6]]})
+     (= (x count [[1] [1 2] [3] [1 2 3] [2 3]])
+        {1 [[1] [3]], 2 [[1 2] [2 3]], 3 [[1 2 3]]})
+     ]))
+
+(def s63
+  (fn my-group-by
+    ([f s] (my-group-by f s {}))
+    ([f s m]
+     (if (empty? s)
+       m
+       (let [r (f (first s))]
+         (if (contains? m r)
+           (my-group-by f (rest s) (assoc m r (conj (m r) (first s))))
+           (my-group-by f (rest s) (assoc m r [(first s)]))
+           )))))
+  )
+
+(defn p63
+  []
+  (println (str "problem 63: " (v63 s63)))
   )
