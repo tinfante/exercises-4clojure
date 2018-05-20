@@ -809,7 +809,7 @@
      (= (x 1023 858) 33)
      ]))
 
-(def s66
+(def s66-a
   ; Euclid's algorithm
   (fn gcd
     ([n1 n2]
@@ -822,7 +822,16 @@
        )))
   )
 
+(def s66-b
+  ; Euclid's algorithm simplified.
+  (fn
+    [n1 n2]
+    (if (zero? n2)
+      n1
+      (recur n2 (rem n1 n2))))
+  )
+
 (defn p66
   []
-  (println (str "problem 66: " (v66 s66)))
+  (println (str "problem 66: " (v66 s66-b)))
   )

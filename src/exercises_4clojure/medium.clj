@@ -244,3 +244,38 @@
   []
   (println (str "problem 65: " (v65 s65)))
   )
+
+
+;; problem 67
+(defn v67
+  [x]
+  (every? identity
+    [
+     (= (x 2) [2 3])
+     (= (x 5) [2 3 5 7 11])
+     (= (last (x 100)) 541)
+     ]))
+
+(def s67
+  (fn [n]
+    (loop [i 2 l []]
+      (if (= (count l) n)
+        l
+        (if (
+             ; trial division. returns true if x is composite, nil otherwise.
+             (fn [x] (some
+                       #(== % 0)
+                       (map #(mod x %) (range 2 (inc (int (Math/sqrt x)))))
+                       ))
+             i)
+          (recur (inc i) l)
+          (recur (inc i) (conj l i))
+          ))))
+  )
+
+(defn p67
+  []
+  (println (str "problem 67: " (v67 s67)))
+  )
+
+
