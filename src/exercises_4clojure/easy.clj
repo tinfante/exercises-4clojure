@@ -796,3 +796,33 @@
   []
   (println (str "problem 63: " (v63 s63)))
   )
+
+
+;; problem 66
+(defn v66
+  [x]
+  (every? identity
+    [
+     (= (x 2 4) 2)
+     (= (x 10 5) 5)
+     (= (x 5 7) 1)
+     (= (x 1023 858) 33)
+     ]))
+
+(def s66
+  ; Euclid's algorithm
+  (fn gcd
+    ([n1 n2]
+     (gcd n2 (quot n1 n2) (rem n1 n2))  ; rem or mod? mod only returns positives.
+     )
+    ([prev-r q r]
+     (if (zero? r)
+       prev-r
+       (gcd r (quot prev-r r) (rem prev-r r))
+       )))
+  )
+
+(defn p66
+  []
+  (println (str "problem 66: " (v66 s66)))
+  )
