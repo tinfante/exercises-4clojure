@@ -256,13 +256,14 @@
      (= (last (x 100)) 541)
      ]))
 
-(def s67
+(def s67-a
   (fn [n]
     (loop [i 2 l []]
       (if (= (count l) n)
         l
         (if (
-             ; trial division. returns true if x is composite, nil otherwise.
+             ; below, trial division function.
+             ; returns true if x is composite, nil otherwise.
              (fn [x] (some
                        #(== % 0)
                        (map #(mod x %) (range 2 (inc (int (Math/sqrt x)))))
@@ -273,9 +274,30 @@
           ))))
   )
 
+(defn soe
+  "Sieve of Eratosthenes.
+  Doesn't return a list of primes up to the -nth prime. Instead,
+  generates a range up to n and applies the sieve to it. Faster than
+  previous function, but generates stack overflow for large n. For an
+  interesting discussion about generating primes in clojure see:
+      https://yonatankoren.com/post/3-lazy-prime-sequence
+  "
+  ([n]
+  (soe n 2 (vec (range 2 (inc n))))
+  )
+  ([n p s]
+  (if (= p n)
+    (filter #(boolean %) s)
+    (if (s (- p 2))  ; Check if vector index for p is not false.
+      (soe n (inc p)
+            (reduce (fn [x y] (assoc x (- y 2) false)) s (range (* p 2) (inc n) p))
+            )
+      (soe n (inc p) s)
+      ))))
+
 (defn p67
   []
-  (println (str "problem 67: " (v67 s67)))
+  (println (str "problem 67: " (v67 s67-a)))
   )
 
 
