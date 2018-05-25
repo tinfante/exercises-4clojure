@@ -380,3 +380,22 @@
   (println (str "problem 64: " (v64 s64)))
   )
 
+
+;; problem 68
+(defn v68
+  [x]
+  (= x
+     (loop [x 5
+            result []]
+       (if (> x 0)
+         (recur (dec x) (conj result (+ 2 x)))
+         result))))
+
+(def s68
+  [7, 6, 5, 4, 3]
+  )
+
+(defn p68
+  []
+  (println (str "problem 68: " (v68 s68)))
+  )
