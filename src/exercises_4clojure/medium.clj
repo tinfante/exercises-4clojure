@@ -334,3 +334,43 @@
   []
   (println (str "problem 69: " (v69 s69)))
   )
+
+
+;; problem 70
+(defn v70
+  [x]
+  (every? identity
+          [
+           (= (x  "Have a nice day.")
+              ["a" "day" "Have" "nice"])
+           (= (x  "Clojure is a fun language!")
+              ["a" "Clojure" "fun" "is" "language"])
+           (= (x  "Fools fall for foolish follies.")
+              ["fall" "follies" "foolish" "Fools" "for"])
+     ]))
+
+(def s70
+  (fn
+    [string]
+    (re-seq #"\w+" string)
+    )
+  )
+
+(defn compare-words
+  [word-1 word-2]
+  ((fn
+    [c1 c2 v]
+    (cond
+      (empty? c1) (map char (apply conj v c1))
+      (empty? c2) (map char (apply conj v c2))
+      (= (first c1) (first c2)) (recur (rest c1) (rest c2) (conj v (first c1)))
+      (< (first c1) (first c2)) (map char (apply conj v c1))
+      (> (first c1) (first c2)) (map char (apply conj v c2))
+      )
+    ) (map int word-1) (map int word-2) [])
+  )
+
+(defn p70
+  []
+  (println (str "problem 70: " (v70 s70)))
+  )
