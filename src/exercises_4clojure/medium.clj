@@ -1,4 +1,6 @@
-(ns exercises-4clojure.medium)
+(ns exercises-4clojure.medium
+  (:require [clojure.string :as s])
+  )
 
 
 ;; problem 50
@@ -200,7 +202,7 @@
      ]))
 
 (def s60
-  (fn my-reduce 
+  (fn my-reduce
     ([func sqnc] (my-reduce func (first sqnc) (rest sqnc)))
     ([func value sqnc]
      (lazy-seq
@@ -356,18 +358,38 @@
     )
   )
 
-(defn compare-words
-  [word-1 word-2]
-  ((fn
-    [c1 c2 v]
-    (cond
-      (empty? c1) (map char (apply conj v c1))
-      (empty? c2) (map char (apply conj v c2))
-      (= (first c1) (first c2)) (recur (rest c1) (rest c2) (conj v (first c1)))
-      (< (first c1) (first c2)) (map char (apply conj v c1))
-      (> (first c1) (first c2)) (map char (apply conj v c2))
-      )
-    ) (map int word-1) (map int word-2) [])
+(def compare-words
+  ; This was harder than it should have been. (clojure.string/lower-case \char)
+  ; returns a one element String, and the int function (to get the ascii value)
+  ; doesn't accept Strings, only instanecs of java.lang.Character. In
+  ; frustration I looked up how to transform a one character String to a
+  ; Character (wihout splitting, re-seq, seq, etc), and finally, searched for
+  ; other solutions. All of them use sort-by, which feels like it should be a
+  ; restriction for the exercise. Anyway, java.lang.Character's static
+  ; method toLowerCase returns a Character, so here is a solution without
+  ; sort-by.
+  (fn cw
+    ([word1 word2]
+     (cw (seq word1) (seq word2) [] [])
+     )
+    ([w1 w2 p1 p2]
+     (let [f1 (int (Character/toLowerCase (first w1)))
+           f2 (int (Character/toLowerCase (first w2)))
+           j (partial s/join "")
+           ]
+       (cond
+         (empty? w1) (j p1)
+         (empty? w2) (j p2)
+         (< f1 f2) (j (apply conj p1 w1))
+         (> f1 f2) (j (apply conj p2 w2))
+         (= f1 f2) (recur (rest w1)
+                          (rest w2)
+                          (conj p1 (first w1))
+                          (conj p2 (first w2)))
+         )
+       )
+     )
+    )
   )
 
 (defn p70
