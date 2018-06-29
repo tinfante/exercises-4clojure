@@ -399,3 +399,40 @@
   []
   (println (str "problem 68: " (v68 s68)))
   )
+
+
+;; problem 71
+(defn v71
+  [x]
+  (= (x (sort (rest (reverse [2 5 4 1 3 6]))))
+     (-> [2 5 4 1 3 6] (reverse) (rest) (sort) (x))
+     5))
+
+(def s71
+  last
+  ; alternatively:
+  ; #(apply max %)
+  ; (fn [_] 5)
+  )
+
+(defn p71
+  []
+  (println (str "problem 71: " (v71 s71))))
+
+
+;; problem 72
+(defn v72
+  [x]
+  (= (x (map inc (take 3 (drop 2 [2 5 4 1 3 6]))))
+     (->> [2 5 4 1 3 6] (drop 2) (take 3) (map inc) (x))
+     11)
+  )
+
+(def s72
+  #(apply + %)
+  )
+
+(defn p72
+  []
+  (println (str "problem 72: " (v72 s72))))
+

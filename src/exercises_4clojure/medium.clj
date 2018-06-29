@@ -336,3 +336,26 @@
   []
   (println (str "problem 69: " (v69 s69)))
   )
+
+
+;; problem 70
+(defn v70
+  [x]
+  (every? identity
+    [
+     (= (x  "Have a nice day.")
+        ["a" "day" "Have" "nice"])
+     (= (x  "Clojure is a fun language!")
+        ["a" "Clojure" "fun" "is" "language"])
+     (= (x  "Fools fall for foolish follies.")
+        ["fall" "follies" "foolish" "Fools" "for"])
+     ]))
+
+(def s70
+  (fn [x] (sort-by s/lower-case (re-seq #"\w+" x)))
+  )
+
+(defn p70
+  []
+  (println (str "problem 70: " (v70 s70)))
+  )
