@@ -82,3 +82,44 @@
   []
   (println (str "problem 73: " (v73 s73)))
   )
+
+
+;; problem 79
+(defn v79
+  [x]
+  (every? identity
+    [
+     (= 7 (x '([1]
+              [2 4]
+             [5 1 4]
+            [2 3 4 5])))
+     (= 20 (x '([3]
+               [2 4]
+              [1 9 3]
+             [9 9 2 4]
+            [4 6 6 7 8]
+           [5 7 3 5 1 4])))
+     ]))
+
+(def s79
+  (fn [x]
+    (letfn [(mp
+              ([t]
+               (mp (rest t) (first t) 0))
+              ([t p i]
+               (if (empty? t)
+                 p
+                 (for [i (range i (+ i 2))]
+                   (mp (rest t) (conj p ((first t) i)) i)))))
+            (fp [t p] (partition (count t) (flatten p)))
+            (sp [fps] (apply min-key (partial reduce +) fps))
+            (psp [s] (clojure.string/join "->" (map str s)))]
+      (let [shortest-path (sp (fp x (mp x)))]
+        (println (psp shortest-path))
+        (apply + shortest-path))))
+  )
+
+(defn p79
+  []
+  (println (str "problem 79: " (v79 s79)))
+  )

@@ -454,3 +454,33 @@
 (defn p77
   []
   (println (str "problem 77: " (v77 s77))))
+
+
+;; problem 78
+(defn v78
+  [z]
+  (every? identity
+    [
+     (= (letfn [(triple [x] #(sub-two (* 3 x)))
+                (sub-two [x] #(stop?(- x 2)))
+                (stop? [x] (if (> x 50) x #(triple x)))]
+          (z triple 2))
+        82)
+     (= (letfn [(my-even? [x] (if (zero? x) true #(my-odd? (dec x))))
+                (my-odd? [x] (if (zero? x) false #(my-even? (dec x))))]
+          (map (partial z my-even?) (range 6)))
+        [true false true false true false])
+     ]))
+
+(def s78
+  (fn [f & a]
+    (let [fa (apply f a)]
+      (if (fn? fa)
+        (recur fa nil)
+        fa
+        )))
+  )
+
+(defn p78
+  []
+  (println (str "problem 78: " (v78 s78))))
