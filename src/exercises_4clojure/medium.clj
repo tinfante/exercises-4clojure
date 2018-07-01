@@ -359,3 +359,98 @@
   []
   (println (str "problem 70: " (v70 s70)))
   )
+
+
+;; problem 74
+(defn v74
+  [x]
+  (every? identity
+    [
+     (= (x "4,5,6,7,8,9") "4,9")
+     (= (x "15,16,25,36,37") "16,25,36")
+     ]))
+
+(def s74
+  (fn [s] (s/join "," (filter #(zero? (mod (Math/sqrt %) 1))
+                              (map #(Integer. %) (re-seq #"\d+" s)))))
+  )
+
+(defn p74
+  []
+  (println (str "problem 74: " (v74 s74)))
+  )
+
+
+;; problem 75
+(defn v75
+  [x]
+  (every? identity
+    [
+     (= (x 1) 1)
+     (= (x 10) (count '(1 3 7 9)) 4)
+     (= (x 40) 16)
+     (= (x 99) 60)
+     ]))
+
+(def s75
+  (fn [n]
+    ; greatest common divisor code is from exercise easy 66.
+    (letfn [(gcd [n1 n2]
+              (if (zero? n2)
+                n1
+                (recur n2 (rem n1 n2))))]
+      (count (filter #(= 1 %) (map (partial gcd n) (range 1 (inc n)))))))
+  )
+
+(defn p75
+  []
+  (println (str "problem 75: " (v75 s75))))
+
+
+;; problem 76
+(defn v76
+  [x]
+  (= x (letfn
+         [(foo [x y] #(bar (conj x y) y))
+          (bar [x y] (if (> (last x) 10)
+                       x
+                       #(foo x (+ 2 y))))]
+         (trampoline foo [] 1))))
+
+(def s76
+  [1 3 5 7 9 11]
+  )
+
+(defn p76
+  []
+  (println (str "problem 76: " (v76 s76))))
+
+
+;; problem 77
+(defn v77
+  [x]
+  (every? identity
+    [
+     (= (x ["meat" "mat" "team" "mate" "eat"])
+        #{#{"meat" "team" "mate"}})
+     (= (x ["veer" "lake" "item" "kale" "mite" "ever"])
+        #{#{"veer" "ever"} #{"lake" "kale"} #{"mite" "item"}})
+     ]))
+
+(def s77
+  (fn af
+    ([v]
+     (af v
+         (keys (filter #(> (val %) 1) (frequencies (map frequencies v))))
+         #{}))
+    ([v f r]
+     (if (empty? f)
+       r
+       (af v
+           (rest f)
+           (conj r (set (filter #(= (first f) (frequencies %)) v)))))))
+  )
+
+(defn p77
+  []
+  (println (str "problem 77: " (v77 s77))))
