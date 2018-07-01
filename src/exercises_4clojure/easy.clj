@@ -835,3 +835,48 @@
   []
   (println (str "problem 66: " (v66 s66-b)))
   )
+
+
+;; problem 81
+(defn v81
+  [x]
+  (every? identity
+    [
+     (= (x #{0 1 2 3} #{2 3 4 5}) #{2 3})
+     (= (x #{0 1 2} #{3 4 5}) #{})
+     (= (x #{:a :b :c :d} #{:c :e :a :f :d}) #{:a :c :d})
+     ]))
+
+(def s81-a
+  ;; This is actually more general than required, because the function
+  ;; can receive any number of sets, not just two.
+  (fn [& x]
+    (set (filter identity (apply (fn [& sl]
+                                   (for [i (first sl)]
+                                     (if (every? #(contains? % i) (rest sl))
+                                       i)))
+                                 x))))
+  )
+
+(def s81-b
+  ;; Cryptic but succint.
+  ;(fn [s1 s2] (set (filter s1 s2)))
+
+  ;; Even shorter.
+  (comp set filter)
+  )
+
+(def s81-c
+  ;; Another alternative.
+  (fn [s1 s2] (set (filter #(contains? s1 %) s2)))
+  )
+
+(def s81-d
+  ;; Yet another possibility.
+  #(set (filter identity (map %1 %2)))
+  )
+
+(defn p81
+  []
+  (println (str "problem 81: " (v81 s81-a)))
+  )
