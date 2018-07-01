@@ -484,3 +484,30 @@
 (defn p78
   []
   (println (str "problem 78: " (v78 s78))))
+
+
+;; problem 80
+(defn v80
+  [x]
+  (every? identity
+    [
+     (= (x 6) true)
+     (= (x 7) false)
+     (= (x 496) true)
+     (= (x 500) false)
+     (= (x 8128) true)
+     ]))
+
+(def s80
+  (fn [n]
+    (if (= n (apply + (filter identity
+                              (for [i (range 2 (inc n))]
+                                (if (zero? (mod n i))
+                                  (/ n i))))))
+      true
+      false))
+  )
+
+(defn p80
+  []
+  (println (str "problem 80: " (v80 s80))))

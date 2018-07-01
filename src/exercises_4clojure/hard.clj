@@ -103,7 +103,12 @@
 
 (def s79
   (fn [x]
-    (letfn [(mp
+    (letfn [
+            ;; No fancy shortest path graph algorithms, just make all
+            ;; the possible paths (mp ), flatten the resulting output
+            ;; (fp ), select the path with the lowest sum, that is,
+            ;; the shortest path (sp ).
+            (mp
               ([t]
                (mp (rest t) (first t) 0))
               ([t p i]
