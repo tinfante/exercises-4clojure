@@ -120,7 +120,7 @@
             (sp [fps] (apply min-key (partial reduce +) fps))
             (psp [s] (clojure.string/join "->" (map str s)))]
       (let [shortest-path (sp (fp x (mp x)))]
-        (println (psp shortest-path))
+        ;(println (psp shortest-path))
         (apply + shortest-path))))
   )
 

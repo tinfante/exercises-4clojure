@@ -436,3 +436,100 @@
   []
   (println (str "problem 72: " (v72 s72))))
 
+
+;; problem 134
+(defn v134
+  [x]
+  (every? identity
+    [
+     (true?  (x :a {:a nil :b 2}))   
+     (false? (x :b {:a nil :b 2}))
+     (false? (x :c {:a nil :b 2}))
+     ]))
+
+(def s134
+  (fn [k m]
+    (if (contains? m k)
+      (if (nil? (k m))
+        true false)
+      false
+      ))
+  )
+
+(def s134-a
+  ; Using get with a default argument to return something
+  ; other than nil if key not in map. The same can be
+  ; achieved with: #(nil? (%1 %2 "asd"))
+  #(nil? (get %2 %1 "qwe"))
+  )
+
+(defn p134
+  []
+  (println (str "problem 134: " (v134 s134-a))))
+
+
+;; problem 145
+(defn v145
+  [x]
+  (every? identity
+    [
+     (= x (for [x (range 40)
+                :when (= 1 (rem x 4))]
+            x))
+     (= x (for [x (iterate #(+ 4 %) 0)
+                :let [z (inc x)]
+                :while (< z 40)]
+            z))
+     (= x (for [[x y] (partition 2 (range 20))]
+            (+ x y)))
+     ]))
+
+(def s145
+  [1 5 9 13 17 21 25 29 33 37]
+  )
+
+(defn p145
+  []
+  (println (str "problem 145: " (v145 s145))))
+
+
+;; problem 156
+(defn v156
+  [x]
+  (every? identity
+    [
+     (= (x 0 [:a :b :c]) {:a 0 :b 0 :c 0})    
+     (= (x "x" [1 2 3]) {1 "x" 2 "x" 3 "x"})
+     (= (x [:a :b] [:foo :bar]) {:foo [:a :b] :bar [:a :b]})
+     ]))
+
+(def s156
+  #(zipmap %2 (repeat %1))
+  )
+
+(defn p156
+  []
+  (println (str "problem 156: " (v156 s156))))
+
+
+;; problem 162
+(defn v162
+  [x]
+  (every? identity
+    [
+     (= x (if-not false 1 0))
+     (= x (if-not nil 1 0))
+     (= x (if true 1 0))
+     (= x (if [] 1 0))
+     (= x (if [0] 1 0))
+     (= x (if 0 1 0))
+     (= x (if 1 1 0))
+     ]))
+
+(def s162
+  1
+  )
+
+(defn p162
+  []
+  (println (str "problem 162: " (v162 s162))))
