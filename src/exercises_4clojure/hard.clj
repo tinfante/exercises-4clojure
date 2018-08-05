@@ -1,4 +1,5 @@
-(ns exercises-4clojure.hard)
+(ns exercises-4clojure.hard
+  )
 
 
 ;; problem 53
@@ -128,3 +129,34 @@
   []
   (println (str "problem 79: " (v79 s79)))
   )
+
+
+;; problem 92
+(defn v92
+  [x]
+  (every? identity
+    [
+     (= 14 (x "XIV"))
+     (= 827 (x "DCCCXXVII"))
+     (= 3999 (x "MMMCMXCIX"))
+     (= 48 (x "XLVIII"))
+     ]))
+
+(def s92
+  (fn [numeral]
+    (let [m (apply hash-map (interleave [\M   \D  \C  \L \X \V \I]
+                                        [1000 500 100 50 10 5  1]))
+          n (concat (map #(m %) (map char numeral)) [0 0])
+          b (interleave (partition 2 n) (partition 2 (rest n)))]
+      (loop [p b a 0]
+        (if (empty? p)
+          a
+          (let [[f s] (first p)]
+            (recur (rest p) (if (< f s) (- a f) (+ a f))))))))
+  )
+
+(defn p92
+  []
+  (println (str "problem 92: " (v92 s92)))
+  )
+

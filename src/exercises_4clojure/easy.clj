@@ -1,4 +1,6 @@
-(ns exercises-4clojure.easy)
+(ns exercises-4clojure.easy
+  (:require [clojure.set])
+  )
 
 
 ;; problem 19
@@ -879,4 +881,174 @@
 (defn p81
   []
   (println (str "problem 81: " (v81 s81-a)))
+  )
+
+
+;; problem 83
+(defn v83
+  [x]
+  (every? identity
+    [
+     (= false (x false false))
+     (= true (x true false))
+     (= false (x true))
+     (= true (x false true false))
+     (= false (x true true true))
+     (= true (x true true true false))
+     ]))
+
+(def s83
+  #(if (= 1 (count (set %&))) false true)
+  )
+
+(defn p83
+  []
+  (println (str "problem 83: " (v83 s83)))
+  )
+
+
+;; problem 88
+(defn v88
+  [x]
+  (every? identity
+    [
+     (= (x #{1 2 3 4 5 6} #{1 3 5 7}) #{2 4 6 7})
+     (= (x #{:a :b :c} #{}) #{:a :b :c})
+     (= (x #{} #{4 5 6}) #{4 5 6})
+     (= (x #{[1 2] [2 3]} #{[2 3] [3 4]}) #{[1 2] [3 4]})
+     ]))
+
+(def s88-a
+  (fn [s1 s2]
+    (into (set (filter #(not (contains? s2 %)) s1))
+          (filter #(not (contains? s1 %)) s2)))
+  )
+
+(def s88-b
+  (fn [s1 s2]
+    ; using built-in set functions
+    (clojure.set/difference
+      (clojure.set/union s1 s2)
+      (clojure.set/intersection s1 s2))
+    ; alternatively
+    ;(into (clojure.set/difference s1 s2) (clojure.set/difference s2 s1))
+    )
+  )
+
+(defn p88
+  []
+  (println (str "problem 88: " (v88 s88-a)))
+  )
+
+
+;; problem 90
+(defn v90
+  [x]
+  (every? identity
+    [
+     (= (x #{"ace" "king" "queen"} #{"♠" "♥" "♦" "♣"})
+        #{["ace"   "♠"] ["ace"   "♥"] ["ace"   "♦"] ["ace"   "♣"]
+          ["king"  "♠"] ["king"  "♥"] ["king"  "♦"] ["king"  "♣"]
+          ["queen" "♠"] ["queen" "♥"] ["queen" "♦"] ["queen" "♣"]})
+     (= (x #{1 2 3} #{4 5})
+        #{[1 4] [2 4] [3 4] [1 5] [2 5] [3 5]})
+     (= 300 (count (x (into #{} (range 10))
+                      (into #{} (range 30)))))
+     ]))
+
+(def s90
+  #(set (for [x %1 y %2] [x y]))
+  )
+
+(defn p90
+  []
+  (println (str "problem 90: " (v90 s90)))
+  )
+
+
+;; problem 95
+(defn v95
+  [x]
+  (every? identity
+    [
+     (= (x '(:a (:b nil nil) nil))
+        true)
+     (= (x '(:a (:b nil nil)))
+        false)
+     (= (x [1 nil [2 [3 nil nil] [4 nil nil]]])
+        true)
+     (= (x [1 [2 nil nil] [3 nil nil] [4 nil nil]])
+        false)
+     (= (x [1 [2 [3 [4 nil nil] nil] nil] nil])
+        true)
+     (= (x [1 [2 [3 [4 false nil] nil] nil] nil])
+        false)
+     (= (x '(:a nil ()))
+        false)
+     ]))
+
+(def s95
+  (fn bt? [n]
+    (if (not= 3 (count n))
+      false
+      (every?
+        #(identity %)
+        (for [i n]
+          (if (contains?
+                #{java.lang.Long java.lang.String clojure.lang.Keyword nil}
+                (type i))
+            true
+            (if (coll? i)
+              (bt? i)))))))
+  )
+
+(defn p95
+  []
+  (println (str "problem 95: " (v95 s95)))
+  )
+
+;; problem 99
+(defn v99
+  [x]
+  (every? identity
+    [
+     (= (x 1 1) [1])    
+     (= (x 99 9) [8 9 1])
+     (= (x 999 99) [9 8 9 0 1])
+     ]))
+
+(def s99
+  (fn [x y] (for [l (str (* x y))] (Integer. (str l))))
+  )
+
+(defn p99
+  []
+  (println (str "problem 99: " (v99 s99)))
+  )
+
+
+;; problem 107
+(defn v107
+  [x]
+  (every? identity
+    [
+     (= 256 ((x 2) 16)
+            ((x 8) 2))
+     (= [1 8 27 64] (map (x 3) [1 2 3 4]))
+     (= [1 2 4 8 16] (map #((x %) 2) [0 1 2 3 4]))
+     ]))
+
+(def s107
+  (fn [x]
+    (fn [b]
+      (loop [a 1 i x]
+        (if (zero? i)
+          a
+          (recur (* a b) (dec i))
+          ))))
+  )
+
+(defn p107
+  []
+  (println (str "problem 107: " (v107 s107)))
   )

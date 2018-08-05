@@ -511,3 +511,25 @@
 (defn p80
   []
   (println (str "problem 80: " (v80 s80))))
+
+
+;; problem 102
+(defn v102
+  [x]
+  (every? identity
+    [
+     (= (x "something") "something")
+     (= (x "multi-word-key") "multiWordKey")
+     (= (x "leaveMeAlone") "leaveMeAlone")
+     ]))
+
+(def s102
+  (fn [x]
+    (let [p (s/split x #"-")]
+      (s/join "" (into (vector (first p)) (map s/capitalize (rest p))))
+      ))
+  )
+
+(defn p102
+  []
+  (println (str "problem 102: " (v102 s102))))
