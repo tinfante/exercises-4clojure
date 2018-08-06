@@ -1214,3 +1214,17 @@
 (defn p157
   []
   (println (str "problem 157: " (v157 s157))))
+
+
+; problem 173
+(defn v173
+  []
+  (= 3
+     (let [[x y] [+ (range 3)]] (apply x y))
+     (let [[[x y] b] [[+ 1] 2]] (x y b))
+     (let [[x y] [inc 2]] (x y)))
+  )
+
+(defn p173
+  []
+  (println (str "problem 173: " (v173))))
