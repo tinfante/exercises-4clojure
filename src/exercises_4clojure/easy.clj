@@ -880,8 +880,7 @@
 
 (defn p81
   []
-  (println (str "problem 81: " (v81 s81-a)))
-  )
+  (println (str "problem 81: " (v81 s81-a))))
 
 
 ;; problem 83
@@ -903,8 +902,7 @@
 
 (defn p83
   []
-  (println (str "problem 83: " (v83 s83)))
-  )
+  (println (str "problem 83: " (v83 s83))))
 
 
 ;; problem 88
@@ -937,8 +935,7 @@
 
 (defn p88
   []
-  (println (str "problem 88: " (v88 s88-a)))
-  )
+  (println (str "problem 88: " (v88 s88-a))))
 
 
 ;; problem 90
@@ -962,8 +959,7 @@
 
 (defn p90
   []
-  (println (str "problem 90: " (v90 s90)))
-  )
+  (println (str "problem 90: " (v90 s90))))
 
 
 ;; problem 95
@@ -1004,15 +1000,14 @@
 
 (defn p95
   []
-  (println (str "problem 95: " (v95 s95)))
-  )
+  (println (str "problem 95: " (v95 s95))))
 
 ;; problem 99
 (defn v99
   [x]
   (every? identity
     [
-     (= (x 1 1) [1])    
+     (= (x 1 1) [1])
      (= (x 99 9) [8 9 1])
      (= (x 999 99) [9 8 9 0 1])
      ]))
@@ -1023,8 +1018,7 @@
 
 (defn p99
   []
-  (println (str "problem 99: " (v99 s99)))
-  )
+  (println (str "problem 99: " (v99 s99))))
 
 
 ;; problem 107
@@ -1050,5 +1044,73 @@
 
 (defn p107
   []
-  (println (str "problem 107: " (v107 s107)))
+  (println (str "problem 107: " (v107 s107))))
+
+
+; problem 120
+(defn v120
+  [x]
+  (every? identity
+    [
+     (= 8 (x (range 10)))
+     (= 19 (x (range 30)))
+     (= 50 (x (range 100)))
+     (= 50 (x (range 1000)))
+     ]))
+
+(def s120
+  (fn [s]
+    (loop [z s
+           a []]
+      (if (empty? z)
+        (count a)
+        (let [d (map #(read-string (str %)) (str (first z)))]
+          (recur (rest z) (if (< (first z)
+                                 (apply + (map #(* % %) d)))
+                            (conj a (first z))
+                            a))))))
   )
+
+(defn p120
+  []
+  (println (str "problem 120: " (v120 s120))))
+
+
+; problem 122
+(defn v122
+  [x]
+  (every? identity
+    [
+     (= 0     (x "0"))
+     (= 7     (x "111"))
+     (= 8     (x "1000"))
+     (= 9     (x "1001"))
+     (= 255   (x "11111111"))
+     (= 1365  (x "10101010101"))
+     (= 1365  (x "10101010101"))
+     ]))
+
+(def s122
+  #(Integer/parseInt % 2)
+  )
+
+(defn p122
+  []
+  (println (str "problem 122: " (v122 s122))))
+
+
+; problem 126
+(defn v126
+  [y]
+  (boolean
+    (let [x y]
+      (and (= (class x) x) x))
+    ))
+
+(def s126
+  Class
+  )
+
+(defn p126
+  []
+  (println (str "problem 126: " (v126 s126))))

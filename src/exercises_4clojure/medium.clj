@@ -533,3 +533,63 @@
 (defn p102
   []
   (println (str "problem 102: " (v102 s102))))
+
+
+; problem 105
+(defn v105
+  [x]
+  (every? identity
+    [
+     (= {} (x []))
+     (= {:a [1]} (x [:a 1]))
+     (= {:a [1], :b [2]} (x [:a 1, :b 2]))
+     (= {:a [1 2 3], :b [], :c [4]} (x [:a 1 2 3 :b :c 4]))
+     ]))
+
+(def s105
+  (fn f
+    ([v] (if (not (empty? v))
+           (f (rest v) (first v) {} [])
+           {}))
+    ([v k m a]
+     (if (empty? v)
+       (assoc m k a)
+       (if (keyword? (first v))
+         (recur (rest v) (first v) (assoc m k a) [])
+         (recur (rest v) k m (conj a (first v)))))))
+  )
+
+(defn p105
+  []
+  (println (str "problem 105: " (v105 s105))))
+
+
+; problem 115
+(defn v115
+  [x]
+  (every? identity
+    [
+     (= true (x 11))
+     (= true (x 121))
+     (= false (x 123))
+     (= true (x 0))
+     (= false (x 88099))
+     (= true (x 89098))
+     (= true (x 89089))
+     (= (take 20 (filter x (range)))
+        [0 1 2 3 4 5 6 7 8 9 11 22 33 44 55 66 77 88 99 101]) 
+     ]))
+
+
+(def s115
+  (fn [n]
+    (let [s (str n)
+          h (int (/ (count s) 2))]
+      (= (reduce + (map read-string (map str (take h s))))
+         (reduce + (map read-string (map str (take-last h s)))))))
+  )
+
+(defn p115
+  []
+  (println (str "problem 115: " (v115 s115))))
+

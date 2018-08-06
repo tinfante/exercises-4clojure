@@ -147,7 +147,11 @@
     (let [m (apply hash-map (interleave [\M   \D  \C  \L \X \V \I]
                                         [1000 500 100 50 10 5  1]))
           n (concat (map #(m %) (map char numeral)) [0 0])
-          b (interleave (partition 2 n) (partition 2 (rest n)))]
+          b (interleave (partition 2 n) (partition 2 (rest n)))
+          ; alternatively, if the step in smaller than the partition size,
+          ; partition will return overlapping elements.
+          ;b (partition 2 1 n)
+          ]
       (loop [p b a 0]
         (if (empty? p)
           a
