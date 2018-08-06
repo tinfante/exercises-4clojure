@@ -1166,3 +1166,51 @@
 (defn p135
   []
   (println (str "problem 135: " (v135 s135))))
+
+
+; problem 143
+(defn v143
+  [x]
+  (every? identity
+    [
+     (= 0 (x [0 1 0] [1 0 0]))
+     (= 3 (x [1 1 1] [1 1 1]))
+     (= 32 (x [1 2 3] [4 5 6]))
+     (= 256 (x [2 5 6] [100 10 1]))
+     ]))
+
+(def s143-a
+  (fn [v1 v2]
+    (reduce
+      #(+ %1 (* (first %2) (second %2))) 0 (partition 2 (interleave v1 v2))))
+  )
+
+; shorter and clearer. map accepts more than 1 seq, and goes over the first
+; item of both, the second item of both, and so on. Stops when there are no
+; more items in either of the seqs.
+(def s143-b
+  #(reduce + (map * %1 %2))
+  )
+
+(defn p143
+  []
+  (println (str "problem 143: " (v143 s143-b))))
+
+
+; problem 157
+(defn v157
+  [x]
+  (every? identity
+    [
+     (= (x [:a :b :c]) [[:a 0] [:b 1] [:c 2]])
+     (= (x [0 1 3]) '((0 0) (1 1) (3 2)))
+     (= (x [[:foo] {:bar :baz}]) [[[:foo] 0] [{:bar :baz} 1]])
+     ]))
+
+(def s157
+  (fn [s] (map-indexed #(vector %2 %1) s))
+  )
+
+(defn p157
+  []
+  (println (str "problem 157: " (v157 s157))))
