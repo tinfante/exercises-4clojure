@@ -1114,3 +1114,55 @@
 (defn p126
   []
   (println (str "problem 126: " (v126 s126))))
+
+
+; problem 128
+(defn v128
+  [x]
+  (every? identity
+    [
+     (= {:suit :diamond :rank 10} (x "DQ"))
+     (= {:suit :heart :rank 3} (x "H5"))
+     (= {:suit :club :rank 12} (x "CA"))
+     (= (range 13) (map (comp :rank x str)
+                        '[S2 S3 S4 S5 S6 S7
+                          S8 S9 ST SJ SQ SK SA]))
+     ]))
+
+(def s128
+  (fn [c]
+    (let [s (seq c)
+          m (apply hash-map (interleave [\2 \3 \4 \5 \6 \7 \8 \9 \T \J \Q \K \A
+                                         \C    \D       \H     \S]
+                                        [0  1  2  3  4  5  6  7  8  9  10 11 12
+                                         :club :diamond :heart :spade]))]
+      {:suit (m (first s)) :rank (m (second s))}))
+  )
+
+(defn p128
+  []
+  (println (str "problem 128: " (v128 s128))))
+
+
+; problem 135
+(defn v135
+  [x]
+  (every? identity
+    [
+     (= 7  (x 2 + 5))
+     (= 42 (x 38 + 48 - 2 / 2))
+     (= 8  (x 10 / 2 - 1 * 2))
+     (= 72 (x 20 / 2 + 2 + 4 + 8 - 6 - 10 * 9))
+     ]))
+
+(def s135
+  (fn [& args]
+    (letfn [(c [l a] (if (empty? l)
+                       a
+                       (recur (rest (rest l)) ((first l) a (second l)))))]
+      (c (rest args) (first args))))
+  )
+
+(defn p135
+  []
+  (println (str "problem 135: " (v135 s135))))
