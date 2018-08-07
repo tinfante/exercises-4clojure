@@ -535,7 +535,7 @@
   (println (str "problem 102: " (v102 s102))))
 
 
-; problem 105
+;; problem 105
 (defn v105
   [x]
   (every? identity
@@ -564,7 +564,7 @@
   (println (str "problem 105: " (v105 s105))))
 
 
-; problem 115
+;; problem 115
 (defn v115
   [x]
   (every? identity

@@ -1002,6 +1002,7 @@
   []
   (println (str "problem 95: " (v95 s95))))
 
+
 ;; problem 99
 (defn v99
   [x]
@@ -1047,7 +1048,7 @@
   (println (str "problem 107: " (v107 s107))))
 
 
-; problem 120
+;; problem 120
 (defn v120
   [x]
   (every? identity
@@ -1076,7 +1077,7 @@
   (println (str "problem 120: " (v120 s120))))
 
 
-; problem 122
+;; problem 122
 (defn v122
   [x]
   (every? identity
@@ -1099,7 +1100,7 @@
   (println (str "problem 122: " (v122 s122))))
 
 
-; problem 126
+;; problem 126
 (defn v126
   [y]
   (boolean
@@ -1116,7 +1117,7 @@
   (println (str "problem 126: " (v126 s126))))
 
 
-; problem 128
+;; problem 128
 (defn v128
   [x]
   (every? identity
@@ -1144,7 +1145,7 @@
   (println (str "problem 128: " (v128 s128))))
 
 
-; problem 135
+;; problem 135
 (defn v135
   [x]
   (every? identity
@@ -1168,7 +1169,7 @@
   (println (str "problem 135: " (v135 s135))))
 
 
-; problem 143
+;; problem 143
 (defn v143
   [x]
   (every? identity
@@ -1197,7 +1198,7 @@
   (println (str "problem 143: " (v143 s143-b))))
 
 
-; problem 157
+;; problem 157
 (defn v157
   [x]
   (every? identity
@@ -1216,7 +1217,7 @@
   (println (str "problem 157: " (v157 s157))))
 
 
-; problem 173
+;; problem 173
 (defn v173
   []
   (= 3
@@ -1228,3 +1229,27 @@
 (defn p173
   []
   (println (str "problem 173: " (v173))))
+
+
+;; problem 166
+(defn v166
+  [x]
+  (every? identity
+    [
+     (= :gt (x < 5 1))
+     (= :eq (x (fn [x y] (< (count x) (count y))) "pear" "plum"))
+     (= :lt (x (fn [x y] (< (mod x 5) (mod y 5))) 21 3))
+     (= :gt (x > 0 2))
+     ]))
+
+(def s166
+  (fn [c x y]
+    (cond
+      (c x y) :lt
+      (c y x) :gt
+      :default :eq))
+  )
+
+(defn p166
+  []
+  (println (str "problem 166: " (v166 s166))))
