@@ -513,6 +513,34 @@
   (println (str "problem 80: " (v80 s80))))
 
 
+;; problem 86
+(defn v86
+  [x]
+  (every? identity
+    [
+     (= (x 7) true)
+     (= (x 986543210) true)
+     (= (x 2) false)
+     (= (x 3) false)
+     ]))
+
+(def s86
+  (fn hn?
+    ([n] (hn? n []))
+    ([n m]
+     (cond
+       (= n 1) true
+       (contains? m n) false
+       :default (let [ss (reduce + (map  #(let [d (read-string (str %))]
+                                            (* d d)) (str n)))]
+                  (recur ss (conj m ss))))))
+  )
+
+(defn p86
+  []
+  (println (str "problem 86: " (v86 s86))))
+
+
 ;; problem 102
 (defn v102
   [x]
