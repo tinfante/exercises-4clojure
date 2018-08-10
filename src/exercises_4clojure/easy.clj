@@ -1003,6 +1003,39 @@
   (println (str "problem 95: " (v95 s95))))
 
 
+;; problem 97
+(defn v97
+  [x]
+  (every? identity
+    [
+     (= (x 1) [1])
+     (= (map x (range 1 6))
+        [     [1]
+             [1 1]
+            [1 2 1]
+           [1 3 3 1]
+          [1 4 6 4 1]])
+     (= (x 11)
+        [1 10 45 120 210 252 210 120 45 10 1])
+     ]))
+
+(def s97
+  (fn [n]
+    (loop [v [1]
+           i 1]
+      (if (= n i)
+        v
+        (recur
+          (apply vector
+                 (map #(apply + %) (partition 2 1(into [0] (conj v 0)))))
+          (inc i)))))
+  )
+
+(defn p97
+  []
+  (println (str "problem 97: " (v97 s97))))
+
+
 ;; problem 99
 (defn v99
   [x]
