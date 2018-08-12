@@ -1259,6 +1259,63 @@
   (println (str "problem 143: " (v143 s143-b))))
 
 
+;; problem 153
+(defn v153
+  [x]
+  (every? identity
+    [
+     (= (x #{#{\U} #{\s} #{\e \R \E} #{\P \L} #{\.}})
+        true)
+     (= (x #{#{:a :b :c :d :e}
+             #{:a :b :c :d}
+             #{:a :b :c}
+             #{:a :b}
+             #{:a}})
+        false)
+     (= (x #{#{[1 2 3] [4 5]}
+             #{[1 2] [3 4 5]}
+             #{[1] [2] 3 4 5}
+             #{1 2 [3 4] [5]}})
+        true)
+     (= (x #{#{'a 'b}
+           #{'c 'd 'e}
+           #{'f 'g 'h 'i}
+           #{''a ''c ''f}})
+        true)
+     (= (x #{#{'(:x :y :z) '(:x :y) '(:z) '()}
+             #{#{:x :y :z} #{:x :y} #{:z} #{}}
+             #{'[:x :y :z] [:x :y] [:z] [] {}}})
+        false)
+     (= (x #{#{(= "true") false}
+             #{:yes :no}
+             #{(class 1) 0}
+             #{(symbol "true") 'false}
+             #{(keyword "yes") ::no}
+             #{(class '1) (int \0)}})
+        false)
+     (= (x #{#{distinct?}
+             #{#(-> %) #(-> %)}
+             #{#(-> %) #(-> %) #(-> %)}
+             #{#(-> %) #(-> %) #(-> %)}})
+        true)
+     (= (x #{#{(#(-> *)) + (quote mapcat) #_ nil}
+             #{'+ '* mapcat (comment mapcat)}
+             #{(do) set contains? nil?}
+             #{, , , #_, , empty?}})
+        false)
+     ]))
+
+(def s153
+  (fn [s]
+    (let [a (apply concat s)]
+      (= (count a) (count (distinct a)))))
+  )
+
+(defn p153
+  []
+  (println (str "problem 153: " (v153 s153))))
+
+
 ;; problem 157
 (defn v157
   [x]
@@ -1276,20 +1333,6 @@
 (defn p157
   []
   (println (str "problem 157: " (v157 s157))))
-
-
-;; problem 173
-(defn v173
-  []
-  (= 3
-     (let [[x y] [+ (range 3)]] (apply x y))
-     (let [[[x y] b] [[+ 1] 2]] (x y b))
-     (let [[x y] [inc 2]] (x y)))
-  )
-
-(defn p173
-  []
-  (println (str "problem 173: " (v173))))
 
 
 ;; problem 166
@@ -1314,3 +1357,17 @@
 (defn p166
   []
   (println (str "problem 166: " (v166 s166))))
+
+
+;; problem 173
+(defn v173
+  []
+  (= 3
+     (let [[x y] [+ (range 3)]] (apply x y))
+     (let [[[x y] b] [[+ 1] 2]] (x y b))
+     (let [[x y] [inc 2]] (x y)))
+  )
+
+(defn p173
+  []
+  (println (str "problem 173: " (v173))))

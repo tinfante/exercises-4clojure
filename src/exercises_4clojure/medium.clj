@@ -541,6 +541,47 @@
   (println (str "problem 86: " (v86 s86))))
 
 
+;; problem 98
+(defn v98
+  [x]
+  (every? identity
+    [
+     (= (x #(* % %) #{-2 -1 0 1 2})
+        #{#{0} #{1 -1} #{2 -2}})
+     (= (x #(rem % 3) #{0 1 2 3 4 5 })
+        #{#{0 3} #{1 4} #{2 5}})
+     (= (x identity #{0 1 2 3 4})
+        #{#{0} #{1} #{2} #{3} #{4}})
+     (= (x (constantly true) #{0 1 2 3 4})
+        #{#{0 1 2 3 4}})
+     ]))
+
+(def s98-a
+  (fn [f s]
+    (loop [p (for [e s] [(f e) e])
+           m {}]
+      (if (empty? p)
+        (set (for [x (vals m)] (set x)))
+        ;(recur (rest p) (update m (ffirst p) conj (second (first p))))
+        ; above: 4clojure uses older version, which has no update. below,
+        ; the alternative using assoc.
+        (let [k (ffirst p)
+              v (second (first p))]
+          (recur (rest p) (if (contains? m k)
+                            (assoc m k (conj (m k) v))
+                            (assoc m k [v])))))))
+  )
+
+; alternatively, and much shorter:
+(def s98-b
+  (fn [f s] (set (map set (vals (group-by f s)))))
+  )
+
+(defn p98
+  []
+  (println (str "problem 98: " (v98 s98-b))))
+
+
 ;; problem 102
 (defn v102
   [x]
