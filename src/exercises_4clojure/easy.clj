@@ -1081,6 +1081,34 @@
   (println (str "problem 107: " (v107 s107))))
 
 
+;; problem 118
+(defn v118
+  [x]
+  (every? identity
+    [
+     (= [3 4 5 6 7]
+        (x inc [2 3 4 5 6]))
+     (= (repeat 10 nil)
+        (x (fn [_] nil) (range 10)))
+     (= [1000000 1000001]
+        (->> (x inc (range))
+             (drop (dec 1000000))
+             (take 2)))
+     ]))
+
+(def s118
+  (fn my-map [f s]
+    (if (empty? s)
+      '()  ; or (list) or nil
+      (lazy-seq (cons (f (first s)) (my-map f (rest s))))
+      ))
+  )
+
+(defn p118
+  []
+  (println (str "problem 118: " (v118 s118))))
+
+
 ;; problem 120
 (defn v120
   [x]

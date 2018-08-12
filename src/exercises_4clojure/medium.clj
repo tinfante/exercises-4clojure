@@ -605,7 +605,7 @@
      (= true (x 89098))
      (= true (x 89089))
      (= (take 20 (filter x (range)))
-        [0 1 2 3 4 5 6 7 8 9 11 22 33 44 55 66 77 88 99 101]) 
+        [0 1 2 3 4 5 6 7 8 9 11 22 33 44 55 66 77 88 99 101])
      ]))
 
 (def s115
@@ -619,3 +619,65 @@
 (defn p115
   []
   (println (str "problem 115: " (v115 s115))))
+
+
+;; problem 137
+(defn v137
+  [x]
+  (every? identity
+    [
+     (= [1 2 3 4 5 0 1] (x 1234501 10))
+     (= [0] (x 0 11))
+     (= [1 0 0 1] (x 9 2))
+     (= [1 0] (let [n (rand-int 100000)](x n n)))
+     (= [16 18 5 24 15 1] (x Integer/MAX_VALUE 42))
+     ]))
+
+(def s137
+  (fn cb
+    ([n b] (cb (int (/ n b)) b [(mod n b)]))
+    ([n b v]
+     (if (= n 0)
+       (reverse v)
+       (recur (int (/ n b)) b (conj v (mod n b))))))
+  )
+
+(defn p137
+  []
+  (println (str "problem 137: " (v137 s137))))
+
+
+;; problem 171
+(defn v171
+  [x]
+  (every? identity
+    [
+     (= (x [1 2 3]) [[1 3]])
+     (= (x [10 9 8 1 2 3]) [[1 3] [8 10]])
+     (= (x [1 1 1 1 1 1 1]) [[1 1]])
+     (= (x []) [])
+     (= (x [19 4 17 1 3 10 2 13 13 2 16 4 2 15 13 9 6 14 2 11])
+        [[1 4] [6 6] [9 11] [13 17] [19 19]])
+     ]))
+
+(def s171
+  (fn i
+    ([v]
+     (if (empty? v)
+       v
+       (let [sv (sort v)]
+         (i (rest (distinct sv)) (conj [] (first sv)) []))))
+    ([sv tv ov]
+     (if (empty? sv)
+       (for [nv (conj ov tv)]
+         (if (= (count nv) 1)
+           (apply vector (concat nv nv))
+           (conj [] (first nv) (last nv))))
+       (if (= (first sv) (inc (last tv)))
+         (recur (rest sv) (conj tv (first sv)) ov)
+         (recur (rest sv) [(first sv)] (conj ov tv))))))
+  )
+
+(defn p171
+  []
+  (println (str "problem 171: " (v171 s171))))
