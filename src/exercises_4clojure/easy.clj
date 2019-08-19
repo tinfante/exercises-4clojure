@@ -1259,6 +1259,28 @@
   (println (str "problem 143: " (v143 s143-b))))
 
 
+;; problem 147
+(defn v147
+  [x]
+  (every? identity
+    [
+     (= (second (x [2 3 2])) [2 5 5 2])
+     (= (take 5 (x [1])) [[1] [1 1] [1 2 1] [1 3 3 1] [1 4 6 4 1]])
+     (= (take 2 (x [3 1 2])) [[3 1 2] [3 4 3 2]])
+     (= (take 100 (x [2 4 2])) (rest (take 101 (x [2 2]))))
+     ]))
+
+(def s147
+  (fn pt [v]
+    (lazy-seq (cons v (pt (mapv +' (conj v 0) (cons 0 v)))))
+    )
+  )
+
+(defn p147
+  []
+  (println (str "problem 147: " (v147 s147))))
+
+
 ;; problem 153
 (defn v153
   [x]
