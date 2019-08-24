@@ -17,8 +17,8 @@
   (fn [[f & r]]
     (if r
       (recur r)
-      f)
-    ))
+      f))
+  )
 
 (defn p19
   []
@@ -63,7 +63,8 @@
       (if (zero? c)
         (first t)
         (recur (dec c) (rest t))
-        ))))
+        )))
+  )
 
 (defn p21
   []
@@ -89,7 +90,8 @@
       (if (empty? t)
         c
         (recur (rest t) (inc c))
-        ))))
+        )))
+  )
 
 (defn p22
   []
@@ -113,7 +115,8 @@
       (if (empty? t)
         o
         (recur (rest t) (conj o (first t)))
-        ))))
+        )))
+  )
 
 (defn p23
   []
@@ -132,7 +135,9 @@
      (= (x '(1 10 3)) 14)
      ]))
 
-(def s24 (fn [s] (reduce + s)))
+(def s24
+  (fn [s] (reduce + s))
+  )
 
 (defn p24
   []
@@ -177,7 +182,8 @@
       (if (< c (- x 1))
         (recur (inc c) (conj l (apply + (take-last 2 l))) )
         (rest l)
-        ))))
+        )))
+  )
 
 (defn p26
   []
@@ -201,7 +207,8 @@
   (fn is-palindrome [x]
     (let [l (int (Math/floor (/ (count x) 2)))]
       (= (take l x) (reverse (take-last l x)))
-      )))
+      ))
+  )
 
 (defn p27
   []
@@ -234,7 +241,8 @@
                                 (conj (vec f) (first y))
                                 )))))
                       z))
-      z)))
+      z))
+  )
 
 (defn p28
   []
@@ -258,7 +266,8 @@
   (fn
     [x]
     (clojure.string/join "" (filter #(Character/isUpperCase %) x))
-  ))
+  )
+  )
 
 (defn p29
   []
@@ -287,7 +296,8 @@
        (if (= (first x) last-item)
          (compress (rest x) last-item compressed)
          (compress (rest x) (first x) (conj (vec compressed) (first x)))
-         )))))
+         ))))
+  )
 
 (defn p30
   []
@@ -319,7 +329,8 @@
                (update-in packed [(dec (count packed))] conj last-item)
                )
          (pack (rest x) (first x) (conj packed (list (first x))))
-         )))))
+         ))))
+  )
 
 (defn p31
   []
@@ -423,7 +434,8 @@
            )))
      (rest x)
      (first x)
-     )))
+     ))
+  )
 
 ; feels like cheating
 (def s38-b
@@ -631,7 +643,6 @@
      (= true ((x >) 7 8))
      (= 4 ((x quot) 2 8))
      (= [1 2 3] ((x take) [1 2 3 4 5] 3))
-
      ]))
 
 (def s46

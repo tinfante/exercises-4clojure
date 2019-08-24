@@ -7,7 +7,9 @@
   (= x true)
   )
 
-(def s1 true)
+(def s1
+  true
+  )
 
 (defn p1
   []
@@ -21,7 +23,9 @@
   (= (- 10 (* 2 3)) x)
   )
 
-(def s2 4)
+(def s2
+  4
+  )
 
 (defn p2
   []
@@ -35,7 +39,9 @@
   (=  x (.toUpperCase "hello world"))
   )
 
-(def s3 "HELLO WORLD")
+(def s3
+  "HELLO WORLD"
+  )
 
 (defn p3
   []
@@ -49,7 +55,9 @@
   (= (apply list x) '(:a :b :c))
   )
 
-(def s4 '(:a :b :c))
+(def s4
+  '(:a :b :c)
+  )
 
 (defn p4
   []
@@ -66,7 +74,9 @@
      (= x (conj '(3 4) 2 1))
      ]))
 
-(def s5 '(1 2 3 4))
+(def s5
+  '(1 2 3 4)
+  )
 
 (defn p5
   []
@@ -80,7 +90,9 @@
   (= x (list :a :b :c) (vec '(:a :b :c)) (vector :a :b :c))
   )
 
-(def s6 [:a :b :c])
+(def s6
+  [:a :b :c]
+  )
 
 (defn p6
   []
@@ -97,7 +109,9 @@
      (= x (conj [1 2 3] 4))
      ]))
 
-(def s7 [1 2 3 4])
+(def s7
+  [1 2 3 4]
+  )
 
 (defn p7
   []
@@ -115,7 +129,9 @@
      ;(= x (clojure.set/union #{:a :b :c} #{:b :c :d}))
      ]))
 
-(def s8 #{:a :b :c :d})
+(def s8
+  #{:a :b :c :d}
+  )
 
 (defn p8
   []
@@ -129,7 +145,9 @@
   (= #{1 2 3 4} (conj #{1 4 3} x))
   )
 
-(def s9 2)
+(def s9
+  2
+  )
 
 (defn p9
   []
@@ -146,7 +164,9 @@
      (= x (:b {:a 10, :b 20, :c 30}))
      ]))
 
-(def s10 20)
+(def s10
+  20
+  )
 
 (defn p10
   []
@@ -161,7 +181,9 @@
      (conj {:a 1} x [:c 3])
      ))
 
-(def s11 {:b 2})
+(def s11
+  {:b 2}
+  )
 
 (defn p11
   []
@@ -179,7 +201,9 @@
      (= x (last (list 1 2 3)))
      ]))
 
-(def s12 3)
+(def s12
+  3
+  )
 
 (defn p12
   []
@@ -193,7 +217,9 @@
   (= x (rest [10 20 30 40]))
   )
 
-(def s13 [20 30 40])
+(def s13
+  [20 30 40]
+  )
 
 (defn p13
   []
@@ -212,7 +238,9 @@
      (= x ((partial + 5) 3))
      ]))
 
-(def s14 8)
+(def s14
+  8
+  )
 
 (defn p14
   []
@@ -231,7 +259,9 @@
      (= (x 7) 14)
      ]))
 
-(def s15 #(* % 2))
+(def s15
+  #(* % 2)
+  )
 
 (defn p15
   []
@@ -249,7 +279,9 @@
      (= (x "Rhea") "Hello, Rhea!")
      ]))
 
-(def s16 #(str "Hello, " % "!"))
+(def s16
+  #(str "Hello, " % "!")
+  )
 
 (defn p16
   []
@@ -263,7 +295,9 @@
   (= x (map #(+ % 5) '(1 2 3)))
   )
 
-(def s17 '(6 7 8))
+(def s17
+  '(6 7 8)
+  )
 
 (defn p17
   []
@@ -277,7 +311,9 @@
   (= x (filter #(> % 5) '(3 4 5 6 7)))
   )
 
-(def s18 '(6 7))
+(def s18
+  '(6 7)
+  )
 
 (defn p18
   []
@@ -295,7 +331,9 @@
      (= x (let [x 21] (let [y 3] (/ x y))))
      ]))
 
-(def s35 7)
+(def s35
+  7
+  )
 
 (defn p35
   []
@@ -325,7 +363,9 @@
   (= x (apply str (re-seq #"[A-Z]+" "bA1B3Ce ")))
   )
 
-(def s37 "ABC")
+(def s37
+  "ABC"
+  )
 
 (defn p37
   []
@@ -442,7 +482,7 @@
   [x]
   (every? identity
     [
-     (true?  (x :a {:a nil :b 2}))   
+     (true?  (x :a {:a nil :b 2}))
      (false? (x :b {:a nil :b 2}))
      (false? (x :c {:a nil :b 2}))
      ]))
@@ -498,7 +538,7 @@
   [x]
   (every? identity
     [
-     (= (x 0 [:a :b :c]) {:a 0 :b 0 :c 0})    
+     (= (x 0 [:a :b :c]) {:a 0 :b 0 :c 0})
      (= (x "x" [1 2 3]) {1 "x" 2 "x" 3 "x"})
      (= (x [:a :b] [:foo :bar]) {:foo [:a :b] :bar [:a :b]})
      ]))

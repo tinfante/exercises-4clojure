@@ -295,7 +295,8 @@
             (reduce (fn [x y] (assoc x (- y 2) false)) s (range (* p 2) (inc n) p))
             )
       (soe n (inc p) s)
-      ))))
+      )))
+  )
 
 (defn p67
   []
