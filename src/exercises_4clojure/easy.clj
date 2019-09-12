@@ -1368,6 +1368,27 @@
   (println (str "problem 157: " (v157 s157))))
 
 
+;; problem 161
+(defn v161
+  [x]
+  (every? identity
+    [
+     (clojure.set/superset? x #{2})
+     (clojure.set/subset? #{1} x)
+     (clojure.set/superset? x #{1 2})
+     (clojure.set/subset? #{1 2} x)
+     ]))
+
+(def s161
+  #{1 2 3}
+  )
+
+(defn p161
+  []
+  (println (str "problem 161: " (v161 s161)))
+  )
+
+
 ;; problem 166
 (defn v166
   [x]

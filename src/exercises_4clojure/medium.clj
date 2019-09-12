@@ -514,6 +514,32 @@
   (println (str "problem 80: " (v80 s80))))
 
 
+;; problem 85
+(defn v85
+  [x]
+  (every? identity
+    [
+     (= (x #{1 :a}) #{#{1 :a} #{:a} #{} #{1}})
+     (= (x #{}) #{#{}})
+     (= (x #{1 2 3}) #{#{} #{1} #{2} #{3} #{1 2} #{1 3} #{2 3} #{1 2 3}})
+     (= (count (x (into #{} (range 10)))) 1024)
+     ]))
+
+(def s85
+  (fn [s]
+    (loop [q s
+           a #{#{}}]
+      (if (empty? q)
+        a
+        (recur (rest q) (into a (map #(conj % (first q)) a)))
+          )))
+  )
+
+(defn p85
+  []
+  (println (str "problem 85: " (v85 s85))))
+
+
 ;; problem 86
 (defn v86
   [x]
