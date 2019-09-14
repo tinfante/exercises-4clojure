@@ -4,4 +4,6 @@
 
 (deftest a-test
   (testing "FIXME, I fail."
-    (is (= 0 1))))
+    (is (= true
+           (exercises-4clojure.elementary/v1 exercises-4clojure.elementary/s1)
+           ))))
