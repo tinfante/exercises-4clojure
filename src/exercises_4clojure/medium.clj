@@ -568,6 +568,29 @@
   (println (str "problem 86: " (v86 s86))))
 
 
+;; problem 93
+(defn v93
+  [x]
+  (every? identity
+    [
+     (= (x [["Do"] ["Nothing"]]) [["Do"] ["Nothing"]])
+     (= (x [[[[:a :b]]] [[:c :d]] [:e :f]]) [[:a :b] [:c :d] [:e :f]])
+     (= (x '((1 2)((3 4)((((5 6))))))) '((1 2)(3 4)(5 6)))
+     ]))
+
+(def s93
+  (fn almost-flatten
+    [s]
+    (if (every? sequential? s)
+      (mapcat almost-flatten s)
+      [s]))
+  )
+
+(defn p93
+  []
+  (println (str "problem 93: " (v93 s93))))
+
+
 ;; problem 98
 (defn v98
   [x]
@@ -713,6 +736,43 @@
 (defn p137
   []
   (println (str "problem 137: " (v137 s137))))
+
+
+;; problem 158
+(defn v158
+  [x]
+  (every? identity
+    [
+     (= 10 ((x (fn [a]
+                 (fn [b]
+                   (fn [c]
+                     (fn [d]
+                       (+ a b c d))))))
+            1 2 3 4))
+     (= 24 ((x (fn [a]
+                 (fn [b]
+                   (fn [c]
+                     (fn [d]
+                       (* a b c d))))))
+            1 2 3 4))
+     (= 25 ((x (fn [a]
+                 (fn [b]
+                   (* a b))))
+            5 5))
+     ]))
+
+; This passes the test but doesn't really fulfil the challange, which is
+; to return an n-arity function. This just applies functions until arguments
+; run out, so if less arguments are used, not all functions will be applied.
+(def s158
+  (fn [f]
+    (fn [& args]
+      (reduce #(%1 %2) f args)))
+  )
+
+(defn p158
+  []
+  (println (str "problem 158: " (v158 s158))))
 
 
 ;; problem 171
