@@ -654,6 +654,42 @@
   (println (str "problem 102: " (v102 s102))))
 
 
+;; problem 103
+(defn v103
+  [x]
+  (every? identity
+    [
+     (= (x 1 #{4 5 6}) #{#{4} #{5} #{6}})
+     (= (x 10 #{4 5 6}) #{})
+     (= (x 2 #{0 1 2}) #{#{0 1} #{0 2} #{1 2}})
+     (= (x 3 #{0 1 2 3 4}) #{#{0 1 2} #{0 1 3} #{0 1 4} #{0 2 3} #{0 2 4}
+                             #{0 3 4} #{1 2 3} #{1 2 4} #{1 3 4} #{2 3 4}})
+     (= (x 4 #{[1 2 3] :a "abc" "efg"}) #{#{[1 2 3] :a "abc" "efg"}})
+     (= (x 2 #{[1 2 3] :a "abc" "efg"}) #{#{[1 2 3] :a} #{[1 2 3] "abc"} #{[1 2 3] "efg"}
+                                          #{:a "abc"} #{:a "efg"} #{"abc" "efg"}})
+     ]))
+
+(def s103
+  (fn [n s]
+    (cond
+      (< n 1) #{}
+      (= n 1) (set (map #(set (list %)) s))
+      (= n (count s)) (hash-set s)
+      (> n (count s)) #{}
+      :else ((fn [k d]
+               (if (not-every? #(set? %) d)
+                 (recur k (for [x d] (disj d x)))
+                 (if (= (count (first d)) k)
+                   (set d)
+                   (recur k (set (flatten (map #(for [x %] (disj % x)) d))))
+                   ))) n s)))
+  )
+
+(defn p103
+  []
+  (println (str "problem 103: " (v103 s103))))
+
+
 ;; problem 105
 (defn v105
   [x]
