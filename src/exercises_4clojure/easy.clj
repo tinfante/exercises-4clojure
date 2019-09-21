@@ -1066,6 +1066,35 @@
   (println (str "problem 99: " (v99 s99))))
 
 
+;; problem 100
+(defn v100
+  [x]
+  (every? identity
+    [
+     (== (x 2 3) 6)
+     (== (x 5 3 7) 105)
+     (== (x 1/3 2/5) 2)
+     (== (x 3/4 1/6) 3/2)
+     (== (x 7 5/7 2 3/5) 210)
+     ]))
+
+(def s100
+  (fn [& nums]
+    ((fn [v a]
+       (if (apply = a)
+         (first a)
+         (let [mi (first (apply min-key second (map-indexed list a)))]
+           (recur v (assoc a mi (+ (get a mi) (get v mi))))
+           ))
+       ) (vec nums) (vec nums)
+     ))
+  )
+
+(defn p100
+  []
+  (println (str "problem 100: " (v100 s100))))
+
+
 ;; problem 107
 (defn v107
   [x]
