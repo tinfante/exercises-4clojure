@@ -707,19 +707,20 @@
 (def s104
   (fn [n]
     (loop [i n
-           m (partition 2 [3000 "MMM" 2000 "MM" 1000 "M"
-                           900 "CM" 500 "D" 400 "CD" 300 "CCC" 200 "CC" 100 "C"
-                           90 "XC" 50 "L" 40 "XL" 30 "XXX" 20 "XX" 10 "X"
-                           9 "IX" 5 "V" 4 "IV" 1 "I"])
-           r []]
+            m (partition 2 [3000 "MMM" 2000 "MM" 1000 "M"
+                            900 "CM" 500 "D" 400 "CD" 300 "CCC" 200 "CC" 100 "C"
+                            90 "XC" 50 "L" 40 "XL" 30 "XXX" 20 "XX" 10 "X"
+                            9 "IX" 5 "V" 4 "IV" 1 "I"])
+            r []]
       (if (empty? m)
         (clojure.string/join r)
-        (if (>= i (ffirst m))
-          (if (>= i (* 2 (ffirst m)))
+        (cond
+          (>= i (* 2 (ffirst m)))
             (recur (- i (ffirst m)) m (conj r (second (first m))))
+          (>= i (ffirst m))
             (recur (- i (ffirst m)) (rest m) (conj r (second (first m))))
-            )
-          (recur i (rest m) r)
+          :else 
+            (recur i (rest m) r)
           ))))
   )
 
