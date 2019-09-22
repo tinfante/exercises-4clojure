@@ -690,6 +690,44 @@
   (println (str "problem 103: " (v103 s103))))
 
 
+;; problem 104
+(defn v104
+  [x]
+  (every? identity
+    [
+     (= "I" (x 1))    
+     (= "XXX" (x 30))
+     (= "IV" (x 4))
+     (= "CXL" (x 140))
+     (= "DCCCXXVII" (x 827))
+     (= "MMMCMXCIX" (x 3999))
+     (= "XLVIII" (x 48))    
+     ]))
+
+(def s104
+  (fn [n]
+    (loop [i n
+           m (partition 2 [3000 "MMM" 2000 "MM" 1000 "M"
+                           900 "CM" 500 "D" 400 "CD" 300 "CCC" 200 "CC" 100 "C"
+                           90 "XC" 50 "L" 40 "XL" 30 "XXX" 20 "XX" 10 "X"
+                           9 "IX" 5 "V" 4 "IV" 1 "I"])
+           r []]
+      (if (empty? m)
+        (clojure.string/join r)
+        (if (>= i (ffirst m))
+          (if (>= i (* 2 (ffirst m)))
+            (recur (- i (ffirst m)) m (conj r (second (first m))))
+            (recur (- i (ffirst m)) (rest m) (conj r (second (first m))))
+            )
+          (recur i (rest m) r)
+          ))))
+  )
+
+(defn p104
+  []
+  (println (str "problem 104: " (v104 s104))))
+
+
 ;; problem 105
 (defn v105
   [x]
