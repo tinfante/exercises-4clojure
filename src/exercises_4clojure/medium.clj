@@ -813,6 +813,26 @@
   (println (str "problem 137: " (v137 s137))))
 
 
+;; problem 144
+(defn v144
+  [x]
+  (every? identity
+    [
+     (= (take 3 (x 3.14 int double)) [3.14 3 3.0])
+     (= (take 5 (x 3 #(- % 3) #(+ 5 %))) [3 0 5 2 7])
+     (= (take 12 (x 0 inc dec inc dec inc)) [0 1 0 1 0 1 2 1 2 1 2 3])
+     ]))
+
+(def s144
+  (fn o [v f & fs]
+    (lazy-seq (cons v (apply o (f v) (concat fs (list f))))))
+  )
+
+(defn p144
+  []
+  (println (str "problem 144: " (v144 s144))))
+
+
 ;; problem 158
 (defn v158
   [x]
